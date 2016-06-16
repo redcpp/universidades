@@ -1,0 +1,122 @@
+{% extends "unsearch/parts/base.html" %}
+{% load staticfiles %}
+
+{% block nav-global %}
+	{% include "unsearch/parts/navbar.html" %}
+{% endblock nav-global %}
+
+{% block extrastyle %}
+	<link rel="stylesheet" type="text/css" href="{% static "cssmap-mexico/cssmap-mexico.css" %}" />
+{% endblock %}
+
+{% block extrahead %}
+	<script type="text/javascript">
+		$(function(){ $('#menu1').addClass('uk-active'); });
+	</script>
+	<script type="text/javascript" src="http://cssmapsplugin.com/4/jquery.cssmap.js"></script>
+	<script type="text/javascript">
+	$(document).ready(function () {
+		updateMap();
+		$(window).resize(function() {
+			updateMap();
+		});
+	});
+	function updateMap() {
+		/* Tamaños disponibles: 430, 540, 650, 750, 850, 960, 1280 and 1450 */
+		var $containerSize = $(window).width();
+		if ($containerSize > 2400) {
+			$('#map-mexico').cssMap({'size' : 1450});
+		}
+		else if ($containerSize > 19200) {
+			$('#map-mexico').cssMap({'size' : 1280});
+		}
+		else if ($containerSize > 1600) {
+			$('#map-mexico').cssMap({'size' : 750});
+		}
+		else if ($containerSize > 1280) {
+			$('#map-mexico').cssMap({'size' : 650});
+		}
+		else if ($containerSize >960) {
+			$('#map-mexico').cssMap({'size' : 750});
+		}
+		else if ($containerSize >850) {
+			$('#map-mexico').cssMap({'size' : 650});
+		}
+		else if ($containerSize >650) {
+			$('#map-mexico').cssMap({'size' : 650});
+		}
+		else{
+			$('#map-mexico').cssMap({'size' : 430});
+		}
+	}
+	</script>
+{% endblock extrahead %}
+
+{% block content %}
+<div class="bg-main fn-center" id="main-map">
+	<h1 class="fn-light fn-48">Universidades</h1>
+	<p class="fn-18 fn-light">Encuentra universidad y carrera</p>
+	<form class="buscador-principal">
+		<div class="uk-form-icon">
+			<i class="uk-icon-search"></i>
+			<input type="text" name="" placeholder="Buscar carrera" autofocus>
+		</div>
+		<button><i class="uk-icon-paper-plane"></i></button>
+	</form>
+	<div id="map-mexico">
+		<ul class="mexico">
+			<li class="mx1"><a href="aguascalientes.html">Aguascalientes</a></li>
+			<li class="mx2"><a href="baja_california.html">Baja California</a></li>
+			<li class="mx3"><a href="baja_california_sur.html">Baja California Sur</a></li>
+			<li class="mx4"><a href="campeche.html">Campeche</a></li>
+			<li class="mx5"><a href="chiapas.html">Chiapas</a></li>
+			<li class="mx6"><a href="chihuahua.html">Chihuahua</a></li>
+			<li class="mx7"><a href="coahuila.html">Coahuila de Zaragoza</a></li>
+			<li class="mx8"><a href="colima.html">Colima</a></li>
+			<li class="mx9"><a href="distrito_federal.html">Distrito Federal</a></li>
+			<li class="mx10"><a href="durango.html">Durango</a></li>
+			<li class="mx11"><a href="guanajuato.html">Guanajuato</a></li>
+			<li class="mx12"><a href="guerrero.html">Guerrero</a></li>
+			<li class="mx13"><a href="hidalgo.html">Hidalgo</a></li>
+			<li class="mx14"><a href="jalisco.html">Jalisco</a></li>
+			<li class="mx15"><a href="mexico.html">México</a></li>
+			<li class="mx16"><a href="michoacan.html">Michoacán</a></li>
+			<li class="mx17"><a href="morelos.html">Morelos</a></li>
+			<li class="mx18"><a href="nayarit.html">Nayarit</a></li>
+			<li class="mx19"><a href="nuevo_leon.html">Nuevo León</a></li>
+			<li class="mx20"><a href="oaxaca.html">Oaxaca</a></li>
+			<li class="mx21"><a href="puebla.html">Puebla</a></li>
+			<li class="mx22"><a href="{% url 'unsearch:estado' pk=111 %}">Querétaro</a></li>
+			<li class="mx23"><a href="quintana_roo.html">Quintana Roo</a></li>
+			<li class="mx24"><a href="san_luis-potosi.html">San Luis Potosí</a></li>
+			<li class="mx25"><a href="sinaloa.html">Sinaloa</a></li>
+			<li class="mx26"><a href="sonora.html">Sonora</a></li>
+			<li class="mx27"><a href="tabasco.html">Tabasco</a></li>
+			<li class="mx28"><a href="tamaulipas.html">Tamaulipas</a></li>
+			<li class="mx29"><a href="tlaxcala.html">Tlaxcala</a></li>
+			<li class="mx30"><a href="veracruz.html">Veracruz</a></li>
+			<li class="mx31"><a href="yucatan.html">Yucatán</a></li>
+			<li class="mx32"><a href="zacatecas.html">Zacatecas</a></li>
+		</ul>
+	</div>
+</div>
+
+<div class="bg-top">
+<div class="bloque simple-blur">
+	<h2 class="fn-center fn-black fn-36 mt-10 mb-50">Top búsquedas</h2>
+	<div class="uk-grid" id="top-7">
+		<div class="uk-width-1-1"><a href=""><p><strong>1</strong> Derecho</p></a></div>
+		<div class="uk-width-1-3"><a href=""><p><strong>2</strong> Medicina</p></a></div>
+		<div class="uk-width-1-3"><a href=""><p><strong>3</strong> Ingeniería Civil</p></a></div>
+		<div class="uk-width-1-3"><a href=""><p><strong>4</strong> Contaduría</p></a></div>
+		<div class="uk-width-1-3"><a href=""><p><strong>5</strong> Informática</p></a></div>
+		<div class="uk-width-1-3"><a href=""><p><strong>6</strong> Mecatrónica</p></a></div>
+		<div class="uk-width-1-3"><a href=""><p><strong>7</strong> Enfermería</p></a></div>
+	</div>
+</div>
+</div>
+
+<div class="bloque bg-background">
+	<h2 class="fn-center fn-black fn-36">Estadísticas</h2>
+</div>
+{% endblock content %}

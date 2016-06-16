@@ -1,0 +1,19 @@
+<nav class="uk-navbar" id="navbar">
+	<ul class="uk-navbar-nav">
+		<li id="menu1"><a href="{% url 'unsearch:home' %}">Inicio</a></li>
+		<li class="uk-parent" data-uk-dropdown="">
+			<a href="">Estados <i class="uk-icon-caret-down"></i></a>
+			<div class="uk-dropdown uk-dropdown-navbar">
+				<ul class="uk-nav uk-nav-navbar">
+					<li><a href="{% url 'unsearch:estado' pk=111 %}">Querétaro</a></li>
+				</ul>
+			</div>
+		</li>
+		<li id="menu3"><a href="">Test aptitudinal</a></li>
+	</ul>
+	<div class="uk-navbar-flip">
+		<ul class="uk-navbar-nav">
+			<li id="menu4"><a href="">Contacto</a></li>
+		</ul>
+	</div>
+</nav>

@@ -1,0 +1,47 @@
+{% extends "unsearch/parts/base.html" %}
+{% load staticfiles %}
+
+{% block nav-global %}
+	{% include "unsearch/parts/navbar.html" %}
+{% endblock nav-global %}
+
+{% block bodyclass %}bg-content{% endblock bodyclass %}
+
+{% block content %}
+<div id="bloque-estado" class="bg-estado mb-10">
+	<h2 class="mb-30 fn-center fn-42 fn-light">{{estado}}</h2>
+	<div class="uk-grid">
+		<div class="uk-width-1-2 uk-hidden-small fn-center"><img src="{{MEDIA_URL}}{{estado.imagen.url}}" alt="{{MEDIA_URL}}{{estado.imagen.url}}"></div>
+		<div class="uk-width-medium-1-2 uk-width-small-1-1 vertical-flex pt-20 fn-18 fn-light">
+			<ul class="uk-list">
+				<li class="uk-list-line"><i class="uk-icon-line-chart"></i> <b>{{estado.universidades.count}}</b> Universidades</li>
+				<li class="uk-list-line"><i class="uk-icon-signal"></i> <b>{{carreras}}</b> Programas de estudio</li>
+				<li class="uk-list-line"><i class="uk-icon-pie-chart"></i> <b>18</b> Municipios</li>
+			</ul>
+		</div>
+	</div>
+</div>
+
+{% regroup universidades by tipo as tipo_list %}
+
+<div class="bloque-contenido" id="lista-universidades">
+{% for tipo in tipo_list %}
+	<div class="mb-50 mt-20">
+		<h3 class="fn-36 mb-20 fn-black">{{tipo.grouper}}</h3>
+		<div class="uk-flex uk-flex-middle uk-flex-wrap uk-flex-wrap-space-around">
+		{% for universidad in tipo.list %}
+			<a class="uk-width-1-2 uni">
+				<article class="uk-comment uk-panel">
+					<header class="uk-comment-header">
+						<span class="uk-comment-title fn-14">{{universidad|title}}</span>
+						<div class="uk-comment-meta">Programas: <b>{{universidad.carreras.count}}</b></div>
+					</header>
+				</article>
+			</a>
+		{% endfor %}
+		</div>
+	</div>
+{% endfor %}
+</div>
+
+{% endblock content %}

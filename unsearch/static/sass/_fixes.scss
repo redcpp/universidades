@@ -1,0 +1,19 @@
+/* Barra de navegación
+---------------------- */
+.uk-navbar {
+	background-image: linear-gradient($color-navbar-top, $color-navbar-bottom);
+}
+
+.uk-navbar-nav > li > a {
+	color: #fff;
+	height: $navbar-height;
+	line-height: $navbar-height;
+	-webkit-transition: all .3s; /* Safari */
+		transition: all .3s;
+}
+
+.uk-navbar-nav > li.uk-active > a {
+	color: #fff;
+	background-color: rgba(0,0,0,.2);
+}
+

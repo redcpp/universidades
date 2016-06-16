@@ -1,0 +1,23 @@
+.buscador-principal {
+	input {
+		min-width: 500px;
+		width: 70%;
+		line-height: 40px;
+		font-size: 20px;
+	}
+	button {
+		color: white;
+		background-color: $color-accent;
+		border: none;
+		line-height: 46px;
+		font-size: 20px;
+		padding: 0 20px;
+		-webkit-transition: all .3s; /* Safari */
+		transition: all .3s;
+
+		&:hover {
+			cursor: pointer;
+			background-color: $color-accent-secondary;
+		}
+	}
+}

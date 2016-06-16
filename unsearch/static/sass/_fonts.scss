@@ -1,0 +1,29 @@
+/* Sizes */
+.fn-12 { font-size: 12px; }
+.fn-13 { font-size: 13px; }
+.fn-14 { font-size: 14px; }
+.fn-16 { font-size: 16px; }
+.fn-18 { font-size: 18px; }
+.fn-24 { font-size: 24px; }
+.fn-28 { font-size: 28px; }
+.fn-32 { font-size: 32px; }
+.fn-36 { font-size: 36px; }
+.fn-42 { font-size: 42px; }
+.fn-48 { font-size: 48px; }
+
+/* Black on a light background. */
+.fn-black { color: black; }
+.fn-dark { color: rgba(0, 0, 0, 0.54); }
+.fn-dark.md-inactive { color: rgba(0, 0, 0, 0.26); }
+
+/*White on a dark background. */
+.fn-light { color: rgba(255, 255, 255, 1); }
+.fn-light.md-inactive { color: rgba(255, 255, 255, 0.3); }
+
+/* Alignment */
+.fn-center { text-align: center; }
+.fn-right { text-align: right; }
+.fn-left { text-align: left; }
+
+/* Weight */
+.fn-bold { font-weight: bold; }

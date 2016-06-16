@@ -2,6 +2,7 @@ from django.db import models
 
 class Estado(models.Model):
 	nombre = models.CharField(max_length=50)
+	imagen = models.ImageField(null=True, blank=True)
 
 	class Meta:
 		verbose_name = "Estado"

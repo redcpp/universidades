@@ -1,0 +1,28 @@
+.simple-blur {
+	-webkit-backdrop-filter: blur(10px);
+		background-color: transparent;
+}
+
+.bg-main {
+	background-color: $color-main;
+}
+
+.bg-background {
+	background-color: $color-background;
+}
+
+.bg-top {
+	background: #fff url('../img/gray.jpg') no-repeat center top;
+	background-size: cover;
+	border: 0;
+}
+
+.bg-estado {
+	background: #fff url('../img/red.jpg') no-repeat center top;
+	background-size: cover;
+	border: 0;
+}
+
+.bg-content {
+	background:  linear-gradient(#f8f8f8,#f8f8f8);
+}
