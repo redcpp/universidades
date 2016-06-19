@@ -1,7 +1,6 @@
 .buscador-principal {
 	input {
-		min-width: 500px;
-		width: 70%;
+		width: 100%;
 		line-height: 40px;
 		font-size: 20px;
 	}
@@ -12,8 +11,8 @@
 		line-height: 46px;
 		font-size: 20px;
 		padding: 0 20px;
-		-webkit-transition: all .3s; /* Safari */
-		transition: all .3s;
+		-webkit-transition: all .1.5s; /* Safari */
+		transition: all .1.5s;
 
 		&:hover {
 			cursor: pointer;

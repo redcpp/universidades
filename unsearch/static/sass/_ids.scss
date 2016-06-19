@@ -8,6 +8,7 @@
 	padding-top: 20px;
 	margin-bottom: -10px;
 	div {
+		padding-left: 0;
 		margin-bottom: 50px;
 		text-align: center;
 		font-size: 22px;
@@ -17,19 +18,55 @@
 			transition: all .15s;
 			&:hover {
 				text-decoration: none;
-				color: $color-accent;
+				color: $color-white;
 			}
 		}
 	}
 }
 
 #bloque-estado { 
-	padding: 30px 50px;
-	img { max-height: 175px; }
+	padding-top: 30px;
+	padding-bottom: 30px;
+	text-shadow: .2px .2px 1px #000;
+	.bloque-espacio { padding: 0 20px; }
+	.b-title {
+		letter-spacing: 1.2px;
+		text-shadow: .5px .5px 2px #000;
+	}
+	img {
+		max-height: 175px;
+		max-width: 175px; 
+		-ms-filter: "progid:DXImageTransform.Microsoft.Dropshadow(OffX=3, OffY=3, Color='#444')";
+		filter: "progid:DXImageTransform.Microsoft.Dropshadow(OffX=3, OffY=3, Color='#444')";
+		-webkit-filter: drop-shadow(3px 3px 6px rgba(0,0,0,0.3));
+		filter: url(#drop-shadow);
+	}
 	li {
 		margin-bottom: 30px;
 		i { margin-right: 20px; }
 	}
+	li:last-child { margin-bottom: 0; }
+	.buscador-principal {
+		margin-top: 50px;
+		margin-bottom: 20px;
+		.uk-form-icon { max-width: 600px; }
+	}
+}
+
+#bloque-universidad { 
+	padding-top: 30px;
+	padding-bottom: 30px;
+	.bloque-espacio { padding: 0 20px; }
+	.uk-grid {margin: 0;}
+	.b-title {
+		letter-spacing: 1.2px;
+		text-shadow: .5px .5px 2px #000;
+	}
+	li {
+		margin-bottom: 30px;
+		i { margin-right: 20px; }
+	}
+	li:last-child { margin-bottom: 0; }
 }
 
 #lista-universidades {
@@ -52,6 +89,50 @@
 			color: $color-blue;
 			text-decoration: none;
 			.uk-comment-meta { color: #333; }
+		}
+	}
+}
+
+#carreras {
+	padding: 30px;
+	ul {
+		columns: 3;
+		-webkit-columns: 3;
+		-moz-columns: 3;
+		li {
+			break-inside: avoid-column;
+			-webkit-column-break-inside: avoid;
+			padding: 10px 0;
+		}
+	}
+}
+
+
+/* Media Queries ------------------------------------------------ */
+
+@media (max-width: $small) {
+	#map-mexico { display: none; }
+
+	#bloque-universidad { .b-title { margin-bottom: 30px; } }
+
+	#lista-universidades { .uni { padding: 5px; } }
+
+	#carreras {
+		padding: 30px 15px;
+		ul {
+			columns: 1;
+			-webkit-columns: 1;
+			-moz-columns: 1;
+		}
+	}
+}
+
+@media (min-width: $small + 1) and (max-width: $medium) {
+	#carreras {
+		ul {
+			columns: 2;
+			-webkit-columns: 2;
+			-moz-columns: 2;
 		}
 	}
 }

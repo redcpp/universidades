@@ -2,6 +2,7 @@
 .fn-12 { font-size: 12px; }
 .fn-13 { font-size: 13px; }
 .fn-14 { font-size: 14px; }
+.fn-15 { font-size: 15px; }
 .fn-16 { font-size: 16px; }
 .fn-18 { font-size: 18px; }
 .fn-24 { font-size: 24px; }
@@ -10,6 +11,12 @@
 .fn-36 { font-size: 36px; }
 .fn-42 { font-size: 42px; }
 .fn-48 { font-size: 48px; }
+
+.lh-36 { line-height: 36px; }
+
+/* Colors */
+.fn-accent { color: $color-accent; }
+.fn-accent-secondary { color: $color-accent-secondary; }
 
 /* Black on a light background. */
 .fn-black { color: black; }

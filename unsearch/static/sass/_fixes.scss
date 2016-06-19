@@ -1,7 +1,14 @@
 /* Barra de navegación
 ---------------------- */
+.uk-grid {margin: 0;}
+
+.uk-form-icon {
+	width: calc(100% - 80px);
+	max-width: 800px;
+}
+
 .uk-navbar {
-	background-image: linear-gradient($color-navbar-top, $color-navbar-bottom);
+	background: $color-navbar;
 }
 
 .uk-navbar-nav > li > a {

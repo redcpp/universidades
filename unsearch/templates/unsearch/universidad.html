@@ -1,0 +1,46 @@
+{% extends "unsearch/parts/base.html" %}
+{% load staticfiles %}
+
+{% block nav-global %}
+	{% include "unsearch/parts/navbar.html" %}
+{% endblock nav-global %}
+
+{% block bodyclass %}bg-content{% endblock bodyclass %}
+
+{% block content %}
+<div class="bg-universidad">
+	<div id="bloque-universidad" class="simple-blur mb-10">
+		<div class="uk-grid grid-reset uk-flex uk-flex-middle uk-flex-space-between">
+			<div class="uk-width-medium-1-2 uk-width-small-1-1 fn-center bloque-espacio">
+				<h1 class="b-title fn-light fn-28">{{universidad}}</h1>
+			</div>
+			<div class="uk-width-medium-1-2 uk-width-small-1-1 vertical-flex fn-light fn-15">
+				<ul class="uk-list">
+					<li class="uk-list-line"><i class="uk-icon-map"></i> {{universidad.estado}}</li>
+					<li class="uk-list-line"><i class="uk-icon-group"></i> {{universidad.tipo}}</li>
+					<li class="uk-list-line"><i class="uk-icon-signal"></i> <b>{{carreras.count}}</b> Programas de estudio</li>
+					{% if universidad.sitio_web %}
+						<li class="uk-list-line"><i class="uk-icon-link"></i> <a href="{{universidad.sitio_web}}" class="dark-link" target="_blank"><b>{{universidad.sitio_web}}</b></a></li>
+					{% endif %}
+				</ul>
+			</div>
+		</div>
+	</div>
+</div>
+
+{% regroup carreras by grado as nivel_estudios %}
+
+<div id="carreras">
+{% for nivel in nivel_estudios %}
+	<div class="mb-50 mt-20 fn-black">
+		<h3 class="fn-36 lh-36 mb-20 fn-center">{{nivel.grouper}}</h3>
+		<ul class="uk-list">
+		{% for carrera in nivel.list %}
+			<li class="uk-list-line">{{carrera|lower|capfirst}}</li>
+		{% endfor %}
+		</ul>
+	</div>
+{% endfor %}
+</div>
+
+{% endblock content %}

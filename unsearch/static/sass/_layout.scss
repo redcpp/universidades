@@ -6,6 +6,11 @@
 	margin-right: auto;
 }
 
+.grid-reset > * { padding-left: 0; }
+
+.center-menu { display: block; text-align:center; }
+.center-menu li { display: inline-block; }
+
 .mb-5 { margin-bottom: 5px; }
 .mb-10 { margin-bottom: 10px; }
 .mb-15 { margin-bottom: 15px; }
@@ -67,4 +72,8 @@
 	display: flex;
 	align-items: center;
 	justify-content: center;
+}
+
+@media (max-width: $small) {
+	.bloque-contenido { padding: 30px 15px; }
 }
