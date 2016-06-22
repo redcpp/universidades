@@ -22,10 +22,11 @@
 			</div>
 		</div>
 		<div class="fn-center">
-			<form class="buscador-principal">
+			<form class="buscador-principal" method="POST" action="{% url 'unsearch:estado_buscar' pk=estado.pk %}">
+				{% csrf_token %}
 				<div class="uk-form-icon">
 					<i class="uk-icon-search"></i>
-					<input type="text" name="" placeholder="Buscar carrera en {{estado}}" autofocus>
+					<input type="text" name="busqueda" placeholder="Buscar carrera en {{estado}}" autofocus>
 				</div>
 				<button><i class="uk-icon-paper-plane"></i></button>
 			</form>
@@ -45,7 +46,11 @@
 				<article class="uk-comment uk-panel">
 					<header class="uk-comment-header">
 						<span class="uk-comment-title fn-14">{{universidad|title}}</span>
-						<div class="uk-comment-meta">Programas: <b>{{universidad.carreras.count}}</b></div>
+						{% if universidad.matches %}
+							<div class="uk-comment-meta"><b>{{universidad.matches}}</b></div>
+						{% else %}
+							<div class="uk-comment-meta">Programas: <b>{{universidad.carreras.count}}</b></div>
+						{% endif %}
 					</header>
 				</article>
 			</a>

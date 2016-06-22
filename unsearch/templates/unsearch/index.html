@@ -27,7 +27,7 @@
 		if ($containerSize > 2400) {
 			$('#map-mexico').cssMap({'size' : 1450});
 		}
-		else if ($containerSize > 19200) {
+		else if ($containerSize > 1900) {
 			$('#map-mexico').cssMap({'size' : 1280});
 		}
 		else if ($containerSize > 1600) {
@@ -65,38 +65,38 @@
 	</form>
 	<div id="map-mexico">
 		<ul class="mexico">
-			<li class="mx1"><a href="aguascalientes.html">Aguascalientes</a></li>
-			<li class="mx2"><a href="baja_california.html">Baja California</a></li>
-			<li class="mx3"><a href="baja_california_sur.html">Baja California Sur</a></li>
-			<li class="mx4"><a href="campeche.html">Campeche</a></li>
-			<li class="mx5"><a href="chiapas.html">Chiapas</a></li>
-			<li class="mx6"><a href="chihuahua.html">Chihuahua</a></li>
-			<li class="mx7"><a href="coahuila.html">Coahuila de Zaragoza</a></li>
-			<li class="mx8"><a href="colima.html">Colima</a></li>
-			<li class="mx9"><a href="distrito_federal.html">Distrito Federal</a></li>
-			<li class="mx10"><a href="durango.html">Durango</a></li>
-			<li class="mx11"><a href="guanajuato.html">Guanajuato</a></li>
-			<li class="mx12"><a href="guerrero.html">Guerrero</a></li>
-			<li class="mx13"><a href="hidalgo.html">Hidalgo</a></li>
-			<li class="mx14"><a href="jalisco.html">Jalisco</a></li>
-			<li class="mx15"><a href="mexico.html">México</a></li>
-			<li class="mx16"><a href="michoacan.html">Michoacán</a></li>
-			<li class="mx17"><a href="morelos.html">Morelos</a></li>
-			<li class="mx18"><a href="nayarit.html">Nayarit</a></li>
-			<li class="mx19"><a href="nuevo_leon.html">Nuevo León</a></li>
-			<li class="mx20"><a href="oaxaca.html">Oaxaca</a></li>
-			<li class="mx21"><a href="puebla.html">Puebla</a></li>
+			<li class="mx1"><a href="{% url 'unsearch:estado' pk=81 %}">Aguascalientes</a></li>
+			<li class="mx2"><a href="{% url 'unsearch:estado' pk=82 %}">Baja California</a></li>
+			<li class="mx3"><a href="{% url 'unsearch:estado' pk=83 %}">Baja California Sur</a></li>
+			<li class="mx4"><a href="{% url 'unsearch:estado' pk=84 %}">Campeche</a></li>
+			<li class="mx9"><a href="{% url 'unsearch:estado' pk=124 %}">CDMX</a></li>
+			<li class="mx5"><a href="{% url 'unsearch:estado' pk=87 %}">Chiapas</a></li>
+			<li class="mx6"><a href="{% url 'unsearch:estado' pk=88 %}">Chihuahua</a></li>
+			<li class="mx7"><a href="{% url 'unsearch:estado' pk=85 %}">Coahuila de Zaragoza</a></li>
+			<li class="mx8"><a href="{% url 'unsearch:estado' pk=86 %}">Colima</a></li>
+			<li class="mx10"><a href="{% url 'unsearch:estado' pk=93 %}">Durango</a></li>
+			<li class="mx11"><a href="{% url 'unsearch:estado' pk=94 %}">Guanajuato</a></li>
+			<li class="mx12"><a href="{% url 'unsearch:estado' pk=95 %}">Guerrero</a></li>
+			<li class="mx13"><a href="{% url 'unsearch:estado' pk=96 %}">Hidalgo</a></li>
+			<li class="mx14"><a href="{% url 'unsearch:estado' pk=99 %}">Jalisco</a></li>
+			<li class="mx15"><a href="{% url 'unsearch:estado' pk=100 %}">México</a></li>
+			<li class="mx16"><a href="{% url 'unsearch:estado' pk=102 %}">Michoacán</a></li>
+			<li class="mx17"><a href="{% url 'unsearch:estado' pk=103 %}">Morelos</a></li>
+			<li class="mx18"><a href="{% url 'unsearch:estado' pk=104 %}">Nayarit</a></li>
+			<li class="mx19"><a href="{% url 'unsearch:estado' pk=105 %}">Nuevo León</a></li>
+			<li class="mx20"><a href="{% url 'unsearch:estado' pk=107 %}">Oaxaca</a></li>
+			<li class="mx21"><a href="{% url 'unsearch:estado' pk=126 %}">Puebla</a></li>
 			<li class="mx22"><a href="{% url 'unsearch:estado' pk=111 %}">Querétaro</a></li>
-			<li class="mx23"><a href="quintana_roo.html">Quintana Roo</a></li>
-			<li class="mx24"><a href="san_luis-potosi.html">San Luis Potosí</a></li>
-			<li class="mx25"><a href="sinaloa.html">Sinaloa</a></li>
-			<li class="mx26"><a href="sonora.html">Sonora</a></li>
-			<li class="mx27"><a href="tabasco.html">Tabasco</a></li>
-			<li class="mx28"><a href="tamaulipas.html">Tamaulipas</a></li>
-			<li class="mx29"><a href="tlaxcala.html">Tlaxcala</a></li>
-			<li class="mx30"><a href="veracruz.html">Veracruz</a></li>
-			<li class="mx31"><a href="yucatan.html">Yucatán</a></li>
-			<li class="mx32"><a href="zacatecas.html">Zacatecas</a></li>
+			<li class="mx23"><a href="{% url 'unsearch:estado' pk=112 %}">Quintana Roo</a></li>
+			<li class="mx24"><a href="{% url 'unsearch:estado' pk=113 %}">San Luis Potosí</a></li>
+			<li class="mx25"><a href="{% url 'unsearch:estado' pk=114 %}">Sinaloa</a></li>
+			<li class="mx26"><a href="{% url 'unsearch:estado' pk=115 %}">Sonora</a></li>
+			<li class="mx27"><a href="{% url 'unsearch:estado' pk=116 %}">Tabasco</a></li>
+			<li class="mx28"><a href="{% url 'unsearch:estado' pk=117 %}">Tamaulipas</a></li>
+			<li class="mx29"><a href="{% url 'unsearch:estado' pk=118 %}">Tlaxcala</a></li>
+			<li class="mx30"><a href="{% url 'unsearch:estado' pk=119 %}">Veracruz</a></li>
+			<li class="mx31"><a href="{% url 'unsearch:estado' pk=120 %}">Yucatán</a></li>
+			<li class="mx32"><a href="{% url 'unsearch:estado' pk=121 %}">Zacatecas</a></li>
 		</ul>
 	</div>
 </div>

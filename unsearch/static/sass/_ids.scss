@@ -111,6 +111,8 @@
 /* Media Queries ------------------------------------------------ */
 
 @media (max-width: $small) {
+	#main-map h1 { font-size: 28px; }
+
 	#map-mexico { display: none; }
 
 	#bloque-universidad { .b-title { margin-bottom: 30px; } }

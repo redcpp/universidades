@@ -1,0 +1,104 @@
+{% extends "unsearch/parts/base.html" %}
+{% load staticfiles %}
+
+{% block nav-global %}
+	{% include "unsearch/parts/navbar.html" %}
+{% endblock nav-global %}
+
+{% block bodyclass %}bg-content{% endblock bodyclass %}
+
+{% block content %}
+<div class="uk-container uk-container-center uk-margin-top">
+	<div class="uk-grid" data-uk-grid-margin>
+		<div class="uk-width-1-1 uk-text-center">
+			<h1 class="uk-heading-large">Contacto</h1>
+		</div>
+	</div>
+
+	<div class="uk-grid uk-grid-width-medium-1-2 uk-grid-width-large-1-4 uk-margin-large-top uk-margin-large-bottom" data-uk-grid-margin>
+		<div class="uk-text-center">
+			<div class="uk-thumbnail uk-overlay-hover uk-border-circle">
+				<figure class="uk-overlay">
+					<img class="uk-border-circle contacto-img" src="{% static "img/diego.jpg" %}" alt="">
+					<figcaption class="uk-overlay-panel uk-overlay-background uk-flex uk-flex-center uk-flex-middle uk-text-center uk-border-circle">
+					<div>
+						<a href="" class="uk-icon-button uk-icon-facebook"></a>
+						<a href="" class="uk-icon-button uk-icon-twitter"></a>
+						<a href="" class="uk-icon-button uk-icon-google-plus"></a>
+					</div>
+					</figcaption>
+				</figure>
+			</div>
+			<h2 class="uk-margin-bottom-remove">Diego Said Anaya Mancilla</h2>
+			<p class="uk-text-large uk-margin-top-remove uk-text-muted">Programador (UAQ)</p>
+		</div>
+
+		<div class="uk-text-center">
+			<div class="uk-thumbnail uk-overlay-hover uk-border-circle">
+				<figure class="uk-overlay">
+					<img class="uk-border-circle contacto-img" src="{% static "img/raul.jpg" %}" alt="">
+					<figcaption class="uk-overlay-panel uk-overlay-background uk-flex uk-flex-center uk-flex-middle uk-text-center uk-border-circle">
+					<div>
+						<a href="" class="uk-icon-button uk-icon-facebook"></a>
+						<a href="" class="uk-icon-button uk-icon-twitter"></a>
+						<a href="" class="uk-icon-button uk-icon-google-plus"></a>
+					</div>
+					</figcaption>
+				</figure>
+			</div>
+			<h2 class="uk-margin-bottom-remove">Raúl Parra</h2>
+			<p class="uk-text-large uk-margin-top-remove uk-text-muted">Investigación de campo (UAQ)</p>
+		</div>
+
+		<div class="uk-text-center">
+			<div class="uk-thumbnail uk-overlay-hover uk-border-circle">
+				<figure class="uk-overlay">
+					<img class="uk-border-circle contacto-img" src="{% static "img/carlos.jpg" %}" alt="">
+					<figcaption class="uk-overlay-panel uk-overlay-background uk-flex uk-flex-center uk-flex-middle uk-text-center uk-border-circle">
+					<div>
+						<a href="" class="uk-icon-button uk-icon-facebook"></a>
+						<a href="" class="uk-icon-button uk-icon-twitter"></a>
+						<a href="" class="uk-icon-button uk-icon-google-plus"></a>
+					</div>
+					</figcaption>
+				</figure>
+			</div>
+			<h2 class="uk-margin-bottom-remove">Carlos Andrés Gonzalez Jurado</h2>
+			<p class="uk-text-large uk-margin-top-remove uk-text-muted">Control de calidad (UNAM)</p>
+		</div>
+
+		<div class="uk-text-center">
+			<div class="uk-thumbnail uk-overlay-hover uk-border-circle">
+				<figure class="uk-overlay">
+					<img class="uk-border-circle contacto-img" src="{% static "img/pastor.jpg" %}" alt="">
+					<figcaption class="uk-overlay-panel uk-overlay-background uk-flex uk-flex-center uk-flex-middle uk-text-center uk-border-circle">
+					<div>
+						<a href="" class="uk-icon-button uk-icon-facebook"></a>
+						<a href="" class="uk-icon-button uk-icon-twitter"></a>
+						<a href="" class="uk-icon-button uk-icon-google-plus"></a>
+					</div>
+					</figcaption>
+				</figure>
+			</div>
+			<h2 class="uk-margin-bottom-remove">Diego Pastor Calvo</h2>
+			<p class="uk-text-large uk-margin-top-remove uk-text-muted">Mercadotécnia (UAQ)</p>
+		</div>
+	</div>
+
+
+	<div class="pt-40 pb-40">
+		<h3 class="fn-28 uk-margin-bottom fn-center">Agradecimientos e información</h3>
+		<dl class="uk-description-list-horizontal">
+			<div class="mt-10"></div>
+			<dt><i class="uk-icon-database"></i> Datos</dt>
+			<dd>Universidades y los programas de estudios obtenidos de información pública de la SEP.</dd>
+
+			<div class="mt-10"></div>
+			<dt><i class="uk-icon-paint-brush"></i> Diseñadores</dt>
+			<dd>Gracias a <a href="http://dakoder.deviantart.com/art/MinFlat-Dark-Material-Design-Wallpaper-4K-509845098">DaKoder</a>, por aportar la imagen de fondo que aparece detrás de la descripción del estado. También a <a href="http://www.optawall.com/profile/1/">Optawall</a> por la imagen que aparece detrás de la descripción de la universidad.</dd>
+		</dl>
+	</div>
+
+</div>
+<h3 class="uk-text-large fn-center pt-20 pb-50 uk-margin-remove fn-black">Hecho con <i class="uk-icon-heart"></i> por universitarios mexicanos</h3>
+{% endblock content %}

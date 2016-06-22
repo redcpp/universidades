@@ -1,0 +1,61 @@
+{% extends "unsearch/parts/base.html" %}
+{% load staticfiles %}
+
+{% block nav-global %}
+	{% include "unsearch/parts/navbar.html" %}
+{% endblock nav-global %}
+
+{% block bodyclass %}bg-content{% endblock bodyclass %}
+
+{% block content %}
+<div class="bg-estado">
+	<div id="bloque-estado" class="simple-blur mb-10">
+		<h2 class="b-title mb-30 fn-center fn-42 fn-light">{{estado}}</h2>
+		<div class="uk-grid grid-reset">
+			<div class="uk-width-1-2 uk-hidden-small fn-center"><img src="{{MEDIA_URL}}{{estado.imagen.url}}" alt="{{MEDIA_URL}}{{estado.imagen.url}}"></div>
+			<div class="uk-width-medium-1-2 uk-width-small-1-1 vertical-flex fn-18 fn-light">
+				<ul class="uk-list">
+					<li class="uk-list-line"><i class="uk-icon-line-chart"></i> <b>{{estado.universidades.count}}</b> Universidades</li>
+					<li class="uk-list-line"><i class="uk-icon-signal"></i> <b>{{carreras}}</b> Programas de estudio</li>
+					<li class="uk-list-line"><i class="uk-icon-pie-chart"></i> <b>18</b> Municipios</li>
+				</ul>
+			</div>
+		</div>
+		<div class="fn-center">
+			<form class="buscador-principal" method="POST">
+				{% csrf_token %}
+				<div class="uk-form-icon">
+					<i class="uk-icon-search"></i>
+					<input type="text" name="busqueda" value="{{busqueda}}" placeholder="Buscar carrera en {{estado}}" autofocus>
+				</div>
+				<button><i class="uk-icon-paper-plane"></i></button>
+			</form>
+		</div>
+	</div>
+</div>
+
+{% regroup universidades by tipo as tipo_list %}
+
+<div class="bloque-contenido" id="lista-universidades">
+	<div class="fn-center">
+		<a href="{% url 'unsearch:estado' pk=estado.pk %}"><i class="uk-icon-arrow-left"></i> Ver todas las universidades en {{estado}}</a>
+	</div>
+{% for tipo in tipo_list %}
+	<h3 class="fn-36 lh-36 mb-20 fn-black">{{tipo.grouper}}</h3>
+	{% regroup tipo.list by nombre as list_universidades %}
+	<div class="mb-50 mt-20">
+		{% for universidad in list_universidades %}
+		<h4 class="fn-18 lh-18 mb-20 fn-black">{{universidad.grouper|title}}</h4>
+		<div class="uk-flex uk-flex-middle uk-flex-wrap uk-flex-wrap-space-around">
+			<ul>
+			{% for resultado in universidad.list %}
+				<li>{{resultado.matches|title}}</li>
+			{% endfor %}
+			</ul>
+		</div>
+		{% endfor %}
+	</div>
+{% endfor %}
+</div>
+
+{% endblock content %}
