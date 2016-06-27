@@ -38,8 +38,8 @@
 
 <div class="bloque-contenido" id="lista-universidades">
 {% for tipo in tipo_list %}
-	<div class="mb-50 mt-20">
-		<h3 class="fn-36 lh-36 mb-20 fn-black">{{tipo.grouper}}</h3>
+	<div class="mb-50 mt-30">
+		<h3 class="fn-36 lh-36 mb-20 fn-black fn-center">{{tipo.grouper}}</h3>
 		<div class="uk-flex uk-flex-middle uk-flex-wrap uk-flex-wrap-space-around">
 		{% for universidad in tipo.list %}
 			<a class="uk-width-medium-1-2 uk-width-small-1-1 uni" href="{% url 'unsearch:universidad' pk=universidad.pk %}">

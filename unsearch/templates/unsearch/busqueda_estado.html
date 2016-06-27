@@ -26,7 +26,7 @@
 				{% csrf_token %}
 				<div class="uk-form-icon">
 					<i class="uk-icon-search"></i>
-					<input type="text" name="busqueda" value="{{busqueda}}" placeholder="Buscar carrera en {{estado}}" autofocus>
+					<input type="text" autofocus name="busqueda" value="{{busqueda}}" onfocus="this.value = this.value;" placeholder="Buscar carrera en {{estado}}">
 				</div>
 				<button><i class="uk-icon-paper-plane"></i></button>
 			</form>
@@ -37,25 +37,52 @@
 {% regroup universidades by tipo as tipo_list %}
 
 <div class="bloque-contenido" id="lista-universidades">
-	<div class="fn-center">
-		<a href="{% url 'unsearch:estado' pk=estado.pk %}"><i class="uk-icon-arrow-left"></i> Ver todas las universidades en {{estado}}</a>
+	<div class="fn-center fn-18 mb-50">
+		<a href="{% url 'unsearch:estado' pk=estado.pk %}"><i class="uk-icon-arrow-left"></i> Todas las universidades de {{estado}}</a>
 	</div>
-{% for tipo in tipo_list %}
-	<h3 class="fn-36 lh-36 mb-20 fn-black">{{tipo.grouper}}</h3>
-	{% regroup tipo.list by nombre as list_universidades %}
-	<div class="mb-50 mt-20">
-		{% for universidad in list_universidades %}
-		<h4 class="fn-18 lh-18 mb-20 fn-black">{{universidad.grouper|title}}</h4>
-		<div class="uk-flex uk-flex-middle uk-flex-wrap uk-flex-wrap-space-around">
+	<!-- This is the tabbed navigation containing the toggling elements -->
+	<ul class="uk-tab" data-uk-tab="{connect:'#tab-content'}">
+		{% for tipo in tipo_list %}
+			<li><a href="#">{{tipo.grouper}}</a></li>
+		{% endfor %}
+	</ul>
+	<ul id="tab-content" class="uk-switcher uk-margin">
+		{% for tipo in tipo_list %}
+		{% regroup tipo.list by nombre as list_universidades %}
+		<li>
 			<ul>
-			{% for resultado in universidad.list %}
-				<li>{{resultado.matches|title}}</li>
+			{% for universidad in list_universidades %}
+				<li class="fn-18 fn-black">{{universidad.grouper|title}}</li>
+				<ul>
+				{% for resultado in universidad.list %}
+					<div>{{resultado.matches}}</div>
+				{% endfor %}
+				</ul>
 			{% endfor %}
 			</ul>
-		</div>
+		</li>
 		{% endfor %}
+	</ul>
+<!-- {% for tipo in tipo_list %}
+	<h3 class="fn-36 lh-36 mb-20 fn-center">{{tipo.grouper}}</h3>
+	{% regroup tipo.list by nombre as list_universidades %}
+	<div class="mb-50 mt-20">
+		<div class="uk-flex uk-flex-middle uk-flex-wrap uk-flex-wrap-space-around">
+		{% for universidad in list_universidades %}
+			<div class="uk-width-medium-1-2 uk-width-small-1-1 mb-30">
+				<article class="uk-comment uk-panel">
+					<header class="uk-comment-header">
+						<span class="uk-comment-title fn-18 fn-black">{{universidad.grouper|title}}</span>
+						{% for resultado in universidad.list %}
+							<div class="uk-comment-meta"><b>{{resultado.matches}}</b></div>
+						{% endfor %}
+					</header>
+				</article>
+			</div>
+		{% endfor %}
+		</div>
 	</div>
-{% endfor %}
+{% endfor %} -->
 </div>
 
 {% endblock content %}
