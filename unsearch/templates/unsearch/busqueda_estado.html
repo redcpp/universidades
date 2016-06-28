@@ -25,7 +25,6 @@
 			<form class="buscador-principal" method="POST">
 				{% csrf_token %}
 				<div class="uk-form-icon">
-					<i class="uk-icon-search"></i>
 					<input type="text" autofocus name="busqueda" value="{{busqueda}}" onfocus="this.value = this.value;" placeholder="Buscar carrera en {{estado}}">
 				</div>
 				<button><i class="uk-icon-paper-plane"></i></button>

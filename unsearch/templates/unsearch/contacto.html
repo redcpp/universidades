@@ -5,37 +5,42 @@
 	{% include "unsearch/parts/navbar.html" %}
 {% endblock nav-global %}
 
-{% block bodyclass %}bg-content{% endblock bodyclass %}
-
 {% block content %}
 <div class="uk-container uk-container-center uk-margin-top">
-	<div class="uk-grid" data-uk-grid-margin>
-		<div class="uk-width-1-1 uk-text-center">
-			<h1 class="uk-heading-large fn-black">Contacto</h1>
+
+	<div class="uk-block uk-margin-large-bottom uk-margin-top shadow-1 bg-content tarjeta">
+		<div class="uk-grid uk-flex-middle" data-uk-grid-margin="">
+			<div class="uk-width-medium-1-4 uk-row-first fn-center">
+				<div class="uk-panel"><img class="uk-border-circle uk-thumbnail contacto-img" src="{% static "img/diego.jpg" %}" alt="Placeholder"></div>
+			</div>
+			<div class="uk-width-medium-3-4">
+				<h2 class="mb-5 uk-text-primary fn-32">Diego Said Anaya Mancilla</h2>
+				<div class="uk-text-small mb-30 uk-text-bold">Estudiante de Ingeniería Software en la Universidad Autónoma de Querétaro</div>
+				<p>El sitio se creó para facilitar el acceso a la información, para una toma de decisión más informada a la hora de elegir carrera y/o universidad.</p>
+			</div>
 		</div>
 	</div>
 
-	<div class="uk-grid uk-flex-middle" data-uk-grid-margin="">
-		<div class="uk-width-medium-1-4 uk-row-first fn-center">
-			<div class="uk-panel"><img class="uk-border-circle uk-thumbnail contacto-img" src="{% static "img/diego.jpg" %}" alt="Placeholder"></div>
+	<h2 class="fn-center">Agradecimientos e Información</h2>
+	<div class="uk-grid uk-flex pb-50" data-uk-grid-margin>
+		<div class="uk-width-medium-1-3">
+			<div class="uk-panel uk-panel-box">
+				<h3 class="uk-panel-title"><i class="uk-icon-database"></i> Base de datos</h3>
+				Las universidades y los programas de estudios, fueron obtenidos a través de información pública de la SEP
+			</div>
 		</div>
-		<div class="uk-width-medium-3-4 uk-flex-middle">
-			<h2 class="mb-5 uk-text-primary">Diego Said Anaya Mancilla</h2>
-			<div class="uk-text-small mb-30">Estudiante de Ingeniería Software en la Universidad Autónoma de Querétaro</div>
-			<p>El sitio se creó para facilitar el acceso a la información, para una toma de decisión más informada a la hora de elegir carrera y/o universidad.</p>
+		<div class="uk-width-medium-1-3">
+			<div class="uk-panel uk-panel-box">
+				<h3 class="uk-panel-title"><i class="uk-icon-paint-brush"></i> Diseñadores</h3>
+				Gracias a <a href="http://dakoder.deviantart.com/">DaKoder</a>, por aportar algunas de las imágenes de fondo que aparecen en el sitio
+			</div>
 		</div>
-	</div>
-
-
-	<div class="pt-40 pb-40">
-		<h3 class="fn-28 uk-margin-large-bottom">Agradecimientos e información</h3>
-		<dl class="uk-description-list-line">
-			<dt><i class="uk-icon-database"></i> Datos</dt>
-			<dd>Universidades y los programas de estudios obtenidos de información pública de la SEP.</dd>
-
-			<dt><i class="uk-icon-paint-brush"></i> Diseñadores</dt>
-			<dd>Gracias a <a href="http://dakoder.deviantart.com/art/MinFlat-Dark-Material-Design-Wallpaper-4K-509845098">DaKoder</a>, por aportar la imagen de fondo que aparece detrás de la descripción del estado. También a <a href="http://www.optawall.com/profile/1/">Optawall</a> por la imagen que aparece detrás de la descripción de la universidad.</dd>
-		</dl>
+		<div class="uk-width-medium-1-3">
+			<div class="uk-panel uk-panel-box">
+				<h3 class="uk-panel-title"><i class="uk-icon-wrench"></i> Tecnologías</h3>
+				Se usó <a href="">Django</a>, <a href="">Python 3</a>, <a href="">jQuery</a>, <a href="">BeautifulSoup4</a>, <a href="">SASS</a> y <a href="">UIKit</a> para la construcción de este sitio
+			</div>
+		</div>
 	</div>
 
 </div>

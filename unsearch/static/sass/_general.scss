@@ -2,11 +2,15 @@ html {
 	-webkit-box-sizing: border-box;
 	-moz-box-sizing: border-box;
 	box-sizing: border-box;
+	background-color: #FCFCFC;
 }
 *, *:before, *:after {
 	-webkit-box-sizing: inherit;
 	-moz-box-sizing: inherit;
 	box-sizing: inherit;
+}
+body{
+	background-color: #FCFCFC;
 }
 body, h1, h2, h3, h4, h5, h6, p {
 	font-family: 'Open Sans', sans-serif;
@@ -14,7 +18,6 @@ body, h1, h2, h3, h4, h5, h6, p {
 a {
 	color: $color-link;
 }
-
 a.dark-link {
 	color: $color-blue-dark;
 }
