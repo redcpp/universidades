@@ -5,8 +5,6 @@
 	{% include "unsearch/parts/navbar.html" %}
 {% endblock nav-global %}
 
-{% block bodyclass %}bg-content{% endblock bodyclass %}
-
 {% block content %}
 <div class="bg-estado">
 	<div id="bloque-estado" class="simple-blur mb-10">
@@ -39,8 +37,36 @@
 	<div class="fn-center fn-18 mb-50">
 		<a href="{% url 'unsearch:estado' pk=estado.pk %}"><i class="uk-icon-arrow-left"></i> Todas las universidades de {{estado}}</a>
 	</div>
-	<!-- This is the tabbed navigation containing the toggling elements -->
-	<ul class="uk-tab" data-uk-tab="{connect:'#tab-content'}">
+	
+	<!-- Accordion -->
+	<div class="uk-accordion tarjetas" data-uk-accordion="{collapse: false}">
+		{% for tipo in tipo_list %}
+		<button class="uk-accordion-title intense">
+			<span class="pr-5">{{tipo.grouper}}</span>
+			<span class="uk-text-small uk-hidden-small">Programas: <b>{{tipo.list|length}}</b></span>
+		</button>
+		<div class="uk-accordion-content">
+			{% regroup tipo.list by nombre as list_universidades %}
+			<div class="uk-grid uk-grid-margin ">
+				{% for universidad in list_universidades %}
+				<div class="uk-width-medium-1-2">
+					<article class="uk-comment tarjeta shadow-2">
+						<a class="uk-comment-header" href="{% url 'unsearch:universidad' pk=universidad.list.0.pk %}">
+							<h4 class="uk-comment-title uk-margin-bottom">{{universidad.grouper|title}}</h4>
+						</a>
+						<div class="uk-comment-body">
+							{% for resultado in universidad.list %}
+								<p>{{resultado.matches|lower|capfirst}}</p>
+							{% endfor %}
+						</div>
+					</article>
+				</div>
+				{% endfor %}
+			</div>
+		</div>
+		{% endfor %}
+	</div>
+	<!-- <ul class="uk-tab" data-uk-tab="{connect:'#tab-content'}">
 		{% for tipo in tipo_list %}
 			<li><a href="#">{{tipo.grouper}}</a></li>
 		{% endfor %}
@@ -61,27 +87,7 @@
 			</ul>
 		</li>
 		{% endfor %}
-	</ul>
-<!-- {% for tipo in tipo_list %}
-	<h3 class="fn-36 lh-36 mb-20 fn-center">{{tipo.grouper}}</h3>
-	{% regroup tipo.list by nombre as list_universidades %}
-	<div class="mb-50 mt-20">
-		<div class="uk-flex uk-flex-middle uk-flex-wrap uk-flex-wrap-space-around">
-		{% for universidad in list_universidades %}
-			<div class="uk-width-medium-1-2 uk-width-small-1-1 mb-30">
-				<article class="uk-comment uk-panel">
-					<header class="uk-comment-header">
-						<span class="uk-comment-title fn-18 fn-black">{{universidad.grouper|title}}</span>
-						{% for resultado in universidad.list %}
-							<div class="uk-comment-meta"><b>{{resultado.matches}}</b></div>
-						{% endfor %}
-					</header>
-				</article>
-			</div>
-		{% endfor %}
-		</div>
-	</div>
-{% endfor %} -->
+	</ul> -->
 </div>
 
 {% endblock content %}

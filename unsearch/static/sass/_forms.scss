@@ -7,7 +7,8 @@
 	button {
 		color: white;
 		background-color: $color-accent;
-		border: none;
+		border: 1px solid transparent;
+		border-radius: 5px;
 		line-height: 46px;
 		font-size: 20px;
 		padding: 0 20px;

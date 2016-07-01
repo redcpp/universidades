@@ -2,7 +2,7 @@ html {
 	-webkit-box-sizing: border-box;
 	-moz-box-sizing: border-box;
 	box-sizing: border-box;
-	background-color: #FCFCFC;
+	background-color: $color-body;
 }
 *, *:before, *:after {
 	-webkit-box-sizing: inherit;
@@ -10,10 +10,11 @@ html {
 	box-sizing: inherit;
 }
 body{
-	background-color: #FCFCFC;
+	background-color: $color-body;
+	text-rendering: optimizeLegibility;
 }
-body, h1, h2, h3, h4, h5, h6, p {
-	font-family: 'Open Sans', sans-serif;
+html, body, h1, h2, h3, h4, h5, h6, p, input, button, a {
+	font-family: 'Lato', sans-serif;
 }
 a {
 	color: $color-link;

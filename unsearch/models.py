@@ -11,6 +11,8 @@ class Estado(models.Model):
 	def __str__(self):
 		return self.nombre
 
+# particulares = Universidad.objects.filter(tipo__icontains='IES Particulares').annotate(objs=Count('carreras'))
+# sum([ x.objs for x in particulares])/len(particulares)
 class Universidad(models.Model):
 	estado = models.ForeignKey('unsearch.Estado', related_name='universidades')
 	nombre = models.CharField(max_length=150)

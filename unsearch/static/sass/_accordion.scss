@@ -1,45 +1,53 @@
 button.uk-accordion-title {
 	color: #000;
-	background-color: transparent;
+	background-color: $color-body;
 	border: none;
 	border-top: 1px solid rgba(0,0,0,.2);
 	cursor: pointer;
-	padding: 18px;
+	padding: 15px 0;
 	width: 100%;
 	outline: none;
-	font-size: 18px;
-	font-weight: bold;
+	font-size: 22px;
+	letter-spacing: .9px;
 	transition: all .1s;
+	text-align: left;
+	vertical-align: middle;
+}
+
+button.uk-accordion-title.intense {
+	border-color: rgba(0,0,0,.4);
 }
 
 .uk-accordion .uk-accordion-title:first-of-type{ border: none; }
 
-button.uk-accordion-title:hover { color: #673AB7; }
+button.uk-accordion-title:hover { color: #DD2C00; }
 
-button.uk-accordion-title.uk-active { color: #311B92; }
+button.uk-accordion-title.uk-active { color: #BF360C; }
 
 button.uk-accordion-title:after {
 	content: '\f078';
 	font-family: FontAwesome;
 	font-size: 16px;
-	color: #777;
+	margin-left: auto;
 	float: right;
-	margin-left: 5px;
+	padding-top: 5px;
+	font-weight: bold;
 }
 
 button.uk-accordion-title.uk-active:after {
 	content: "\f077";
-	font-family: FontAwesome;
 }
 
 div.uk-accordion-content {
 	transition: visibility 0s, opacity 0.5s linear;
-	padding-left: 50px;
+	padding-left: 10%;
+	padding-right: 0;
 	.uk-comment {
-		margin-bottom: 10px;
-		letter-spacing: .75px;
+		margin-bottom: 15px;
+		letter-spacing: .8px;
+		padding: 5px 0;
 	}
 	.uk-comment-title {
-		color: $color-link;
+		color: #0b0080;
 	}
 }

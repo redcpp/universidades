@@ -38,17 +38,17 @@
 <div class="bloque-contenido" id="lista-universidades">
 	<div class="uk-accordion" data-uk-accordion="{collapse: false}">
 	{% for tipo in tipo_list %}
-		<button class="uk-accordion-title fn-left">
-			{{tipo.grouper}}
-			<span class="uk-text-small uk-text-right ml-20">Programas: <b>{{tipo.list|length}}</b></span>
+		<button class="uk-accordion-title">
+			<span class="pr-5">{{tipo.grouper}}</span>
+			<span class="uk-text-small uk-hidden-small">Programas: <b>{{tipo.list|length}}</b></span>
 		</button>
 		<div class="uk-accordion-content">
-			<div class="uk-flex uk-flex-middle uk-flex-wrap uk-flex-wrap-space-around">
+			<div class="uk-grid uk-grid-margin">
 			{% for universidad in tipo.list %}
 				<article class="uk-width-1-1 uk-comment">
 					<a class="uk-comment-header" href="{% url 'unsearch:universidad' pk=universidad.pk %}">
 						<h4 class="uk-comment-title">{{universidad|title}}</h4>
-						<div class="uk-comment-meta">Programas: <b>{{universidad.carreras.count}}</div>
+						<div class="uk-comment-meta">Programas: <b>{{universidad.carreras.count}}</b></div>
 					</a>
 				</article>
 			{% endfor %}

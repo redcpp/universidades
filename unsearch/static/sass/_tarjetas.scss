@@ -1,0 +1,14 @@
+.tarjetas {
+	background-color: $color-background;
+	.uk-accordion-content{
+		padding: 20px;
+	}
+	article.tarjeta {
+		background-color: $color-body;
+		border-radius: 5px;
+		padding: 20px;
+		.uk-comment-body {
+			padding-left: 10px;
+		}
+	}
+}
