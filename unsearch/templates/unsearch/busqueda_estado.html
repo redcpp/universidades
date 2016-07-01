@@ -43,7 +43,7 @@
 		{% for tipo in tipo_list %}
 		<button class="uk-accordion-title intense">
 			<span class="pr-5">{{tipo.grouper}}</span>
-			<span class="uk-text-small uk-hidden-small">Programas: <b>{{tipo.list|length}}</b></span>
+			<span class="uk-text-small uk-hidden-small">Coincidencias: <b>{{tipo.list|length}}</b></span>
 		</button>
 		<div class="uk-accordion-content">
 			{% regroup tipo.list by nombre as list_universidades %}
@@ -56,7 +56,7 @@
 						</a>
 						<div class="uk-comment-body">
 							{% for resultado in universidad.list %}
-								<p>{{resultado.matches|lower|capfirst}}</p>
+								<p>{{resultado.matches}}</p>
 							{% endfor %}
 						</div>
 					</article>
