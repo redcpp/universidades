@@ -4,11 +4,12 @@ from .models import Carrera, Universidad, Estado
 
 class EstadoTest(TestCase):
 	def setUp(self):
-		Estado.objects.create(nombre='Aguascalientes')
+		Estado.objects.create(nombre='Aguascalientes', municipios=11)
 
 	def test_estado_insertion_to_db(self):
 		aguascalientes = Estado.objects.get(nombre='Aguascalientes')
 		self.assertEqual(aguascalientes.nombre, 'Aguascalientes')
+		self.assertEqual(aguascalientes.municipios, 11)
 
 class UniversidadTest(TestCase):
 	def setUp(self):

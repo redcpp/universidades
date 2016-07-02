@@ -12,6 +12,6 @@ class UniversidadCarrera(admin.ModelAdmin):
 	list_filter = ('estado__nombre', 'tipo')
 
 class EstadoAdmin(admin.ModelAdmin):
-	list_display = ('pk', 'nombre', 'imagen')
+	list_display = ('pk', 'nombre', 'municipios', 'imagen')
 
 admin.site.register(Estado, EstadoAdmin)

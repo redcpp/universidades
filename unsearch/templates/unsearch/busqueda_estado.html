@@ -1,5 +1,6 @@
 {% extends "unsearch/parts/base.html" %}
 {% load staticfiles %}
+{% load my_tags %}
 
 {% block nav-global %}
 	{% include "unsearch/parts/navbar.html" %}
@@ -48,7 +49,7 @@
 		<div class="uk-accordion-content">
 			{% regroup tipo.list by nombre as list_universidades %}
 			<div class="uk-grid uk-grid-margin ">
-				{% for universidad in list_universidades %}
+				{% for universidad in list_universidades|ordenar_matches %}
 				<div class="uk-width-medium-1-2">
 					<article class="uk-comment tarjeta shadow-2">
 						<a class="uk-comment-header" href="{% url 'unsearch:universidad' pk=universidad.list.0.pk %}">
@@ -66,28 +67,6 @@
 		</div>
 		{% endfor %}
 	</div>
-	<!-- <ul class="uk-tab" data-uk-tab="{connect:'#tab-content'}">
-		{% for tipo in tipo_list %}
-			<li><a href="#">{{tipo.grouper}}</a></li>
-		{% endfor %}
-	</ul>
-	<ul id="tab-content" class="uk-switcher uk-margin">
-		{% for tipo in tipo_list %}
-		{% regroup tipo.list by nombre as list_universidades %}
-		<li>
-			<ul>
-			{% for universidad in list_universidades %}
-				<li class="fn-18 fn-black">{{universidad.grouper|title}}</li>
-				<ul>
-				{% for resultado in universidad.list %}
-					<div>{{resultado.matches}}</div>
-				{% endfor %}
-				</ul>
-			{% endfor %}
-			</ul>
-		</li>
-		{% endfor %}
-	</ul> -->
 </div>
 
 {% endblock content %}
