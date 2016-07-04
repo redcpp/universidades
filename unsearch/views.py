@@ -12,7 +12,9 @@ def registro_de_busquedas(busqueda, raiz, estado, num_universidades):
 	Busqueda.objects.create(estado=estado, query=busqueda, root=raiz, fecha=timezone.now(), num_resultados=num_universidades)
 
 def home(request):
-	return render(request,'unsearch/index.html')
+	carreras = Carrera.objects.count()
+	universidades = Universidad.objects.count()
+	return render(request,'unsearch/index.html', {'universidades':universidades, 'carreras':carreras})
 
 def estado(request, pk):
 	estado = get_object_or_404(Estado, pk=pk)
@@ -36,7 +38,7 @@ def estado_buscar(request, pk):
 
 def universidad(request, pk):
 	universidad = get_object_or_404(Universidad, pk=pk)
-	carreras = Carrera.objects.filter(universidad__pk=pk)
+	carreras = Carrera.objects.filter(universidad__pk=pk).order_by('grado')
 	return render(request,'unsearch/universidad.html', {'carreras':carreras, 'universidad':universidad})
 
 def contacto(request):

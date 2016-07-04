@@ -1,24 +1,27 @@
 #main-map {
-	padding-top: 30px;
+	padding-top: 20px;
 	padding-bottom: 30px;
 	h1 { letter-spacing: 1.5px; }
 }
 
-#top-7 {
-	padding-top: 20px;
-	margin-bottom: -10px;
-	div {
-		padding-left: 0;
-		margin-bottom: 50px;
-		text-align: center;
-		font-size: 22px;
-		a {
-			color: #111;
-			-webkit-transition: all .15s; /* Safari */
-			transition: all .15s;
-			&:hover {
-				text-decoration: none;
-				color: $color-white;
+#quick-stats {
+	background: #fff url('../img/mountains.jpg') no-repeat center top;
+	background-size: cover;
+	border: 2px solid rgba(0,0,0,1);
+	&.uk-grid-divider {
+		margin: 0;
+		div { padding: 0; border-color: #303F9F; }
+	}
+	.uk-panel {
+		// background:  #3F51B5;
+		height: 150px;
+		.uk-panel-title {
+			color: rgba(255,255,255,.8);
+			margin-bottom: 0;
+			.resalte {
+				color: white;
+				font-size: 42px;
+				letter-spacing: 2px;
 			}
 		}
 	}
@@ -69,30 +72,6 @@
 	li:last-child { margin-bottom: 0; }
 }
 
-#lista-universidades {
-	.uni {
-		padding: 15px;
-		letter-spacing: 1px;
-		text-decoration: none;
-		-webkit-transition: all .15s; /* Safari */
-		transition: all .15s;
-		&:hover {
-				box-shadow: 0px 3px 1px -2px rgba(0, 0, 0, .2),
-				0px 2px 2px 0px rgba(0, 0, 0, .2),
-				0px 1px 5px 0px rgba(0, 0, 0, .2);
-				cursor: pointer;
-				background-color: $color-background;
-				.uk-comment-meta { color: #111; }
-			}
-		article {
-			padding: 10px;
-			color: $color-blue;
-			text-decoration: none;
-			.uk-comment-meta { color: #333; }
-		}
-	}
-}
-
 #carreras {
 	padding: 30px;
 	ul {
@@ -105,6 +84,11 @@
 			padding: 10px 0;
 		}
 	}
+	.carrera {
+		padding-top: 12px;
+		padding-bottom: 12px;
+		font-size: 1.1em;
+	}
 }
 
 
@@ -115,7 +99,16 @@
 
 	#map-mexico { display: none; }
 
-	#bloque-universidad { .b-title { margin-bottom: 30px; } }
+	#bloque-universidad { 
+		.b-title {
+			margin-bottom: 30px;
+			color: #000;
+			text-shadow: .5px .5px 2px #fff;
+		}
+		.uk-list-line {
+			color: #000;
+		}
+	}
 
 	#lista-universidades { .uni { padding: 5px; } }
 
@@ -125,6 +118,14 @@
 			columns: 1;
 			-webkit-columns: 1;
 			-moz-columns: 1;
+		}
+	}
+}
+
+@media (max-width: $medium - 1) {
+	#bloque-universidad { 
+		.b-title {
+			margin-bottom: 10px;
 		}
 	}
 }

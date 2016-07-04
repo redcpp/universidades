@@ -16,7 +16,7 @@
 				<ul class="uk-list">
 					<li class="uk-list-line"><i class="uk-icon-line-chart"></i> <b>{{estado.universidades.count}}</b> Universidades</li>
 					<li class="uk-list-line"><i class="uk-icon-signal"></i> <b>{{carreras}}</b> Programas de estudio</li>
-					<li class="uk-list-line"><i class="uk-icon-pie-chart"></i> <b>18</b> Municipios</li>
+					<li class="uk-list-line"><i class="uk-icon-pie-chart"></i> <b>{{estado.municipios}}</b> Municipios</li>
 				</ul>
 			</div>
 		</div>
@@ -48,15 +48,15 @@
 		</button>
 		<div class="uk-accordion-content">
 			{% regroup tipo.list by nombre as list_universidades %}
-			<div class="uk-grid uk-grid-margin ">
+			<div class="uk-grid uk-grid-margin uk-flex uk-flex-center" data-uk-grid-match="{target:'.tarjeta'}">
 				{% for universidad in list_universidades|ordenar_matches %}
-				<div class="uk-width-medium-1-2">
+				<div class="uk-width-medium-1-2 uk-margin-bottom">
 					<article class="uk-comment tarjeta shadow-2">
 						<a class="uk-comment-header" href="{% url 'unsearch:universidad' pk=universidad.list.0.pk %}">
 							<h4 class="uk-comment-title uk-margin-bottom">{{universidad.grouper|title}}</h4>
 						</a>
 						<div class="uk-comment-body">
-							{% for resultado in universidad.list %}
+							{% for resultado in universidad.list|dictsort:"matches" %}
 								<p>{{resultado.matches}}</p>
 							{% endfor %}
 						</div>

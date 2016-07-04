@@ -40,13 +40,15 @@ $color-settings: #8E8E93;
 
 /* Variable colors
 ------------------ */
-$color-main: $color-navy-dark;
+$color-main: rgb(38, 42, 52);
 
 $color-background: $color-background;
 
-$color-navbar: $color-navy-dark;
+$color-navbar: rgb(38, 42, 52);
 
 $color-accent: $color-red;
 $color-accent-secondary: $color-red-dark;
 
 $color-body: #FCFCFC;
+
+$color-quick-stats: $color-messages;
