@@ -36,3 +36,17 @@ class Carrera(models.Model):
 
 	def __str__(self):
 		return self.nombre
+
+class Busqueda(models.Model):
+	estado = models.ForeignKey('unsearch.Estado', related_name='busquedas')
+	query = models.CharField(max_length=100)
+	root = models.CharField(max_length=100)
+	fecha = models.DateTimeField()
+	num_resultados = models.IntegerField()
+
+	class Meta:
+		verbose_name = "Busqueda"
+		verbose_name_plural = "Busquedas"
+
+	def __str__(self):
+		return self.query

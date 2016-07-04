@@ -1,12 +1,25 @@
 from django.test import TestCase
+from datetime import datetime
 
-from .models import Carrera, Universidad, Estado
+from .models import Carrera, Universidad, Estado, Busqueda
+
+class BusquedaTest(TestCase):
+	def setUp(self):
+		aguascalientes = Estado.objects.create(nombre='Aguascalientes', municipios=11)
+		Busqueda.objects.create(estado=aguascalientes, query='Medicina', root='Medic', fecha=datetime.now())
+
+	def test_busqueda_estado_db(self):
+		aguascalientes = Estado.objects.last()
+		ultima_busqueda = Busqueda.objects.last()
+		self.assertEqual(ultima_busqueda.query, 'Medicina')
+		self.assertEqual(ultima_busqueda.root, 'Medic')
+		self.assertEqual(ultima_busqueda.estado, aguascalientes)
 
 class EstadoTest(TestCase):
 	def setUp(self):
 		Estado.objects.create(nombre='Aguascalientes', municipios=11)
 
-	def test_estado_insertion_to_db(self):
+	def test_estado_db(self):
 		aguascalientes = Estado.objects.get(nombre='Aguascalientes')
 		self.assertEqual(aguascalientes.nombre, 'Aguascalientes')
 		self.assertEqual(aguascalientes.municipios, 11)
@@ -26,7 +39,7 @@ class UniversidadTest(TestCase):
 			tipo='Privada'
 		)
 
-	def test_universidad_insertion_to_db(self):
+	def test_universidad_db(self):
 		autonoma = Universidad.objects.get(sitio_web='uag.mx')
 		patito = Universidad.objects.get(nombre='Universidad Patito de Aguascalientes')
 		self.assertEqual(autonoma.estado.nombre, 'Aguascalientes')
@@ -47,7 +60,7 @@ class CarreraTest(TestCase):
 		)
 		Carrera.objects.create(universidad=uag, nombre='Ingenieria software', grado='Licenciatura')
 
-	def test_carrera_insertion_to_db(self):
+	def test_carrera_db(self):
 		ing_software = Carrera.objects.get(nombre='Ingenieria software')
 		self.assertEqual(ing_software.universidad.sitio_web, 'uag.mx')
 		self.assertEqual(ing_software.grado, 'Licenciatura')
