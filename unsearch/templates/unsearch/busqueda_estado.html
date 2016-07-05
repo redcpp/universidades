@@ -8,37 +8,34 @@
 
 {% block content %}
 <div class="bg-estado">
-	<div id="bloque-estado" class="simple-blur mb-10">
-		<h2 class="b-title mb-30 fn-center fn-42 fn-light">{{estado}}</h2>
-		<div class="uk-grid grid-reset">
-			<div class="uk-width-1-2 uk-hidden-small fn-center"><img src="{{MEDIA_URL}}{{estado.imagen.url}}" alt="{{MEDIA_URL}}{{estado.imagen.url}}"></div>
-			<div class="uk-width-medium-1-2 uk-width-small-1-1 vertical-flex fn-18 fn-light">
-				<ul class="uk-list">
-					<li class="uk-list-line"><i class="uk-icon-line-chart"></i> <b>{{estado.universidades.count}}</b> Universidades</li>
-					<li class="uk-list-line"><i class="uk-icon-signal"></i> <b>{{carreras}}</b> Programas de estudio</li>
-					<li class="uk-list-line"><i class="uk-icon-pie-chart"></i> <b>{{estado.municipios}}</b> Municipios</li>
-				</ul>
-			</div>
-		</div>
+	<div id="bloque-estado" class="simple-blur vertical-flex">
 		<div class="fn-center">
-			<form class="buscador-principal" method="POST">
-				{% csrf_token %}
-				<div class="uk-form-icon">
-					<input type="text" autofocus name="busqueda" value="{{busqueda}}" onfocus="this.value = this.value;" placeholder="Buscar carrera en {{estado}}">
-				</div>
-				<button><i class="uk-icon-paper-plane"></i></button>
-			</form>
+			<div class="draw-circle vertical-flex">
+				<img src="{{MEDIA_URL}}{{estado.imagen.url}}" alt="{{MEDIA_URL}}{{estado.imagen.url}}" class="estado-img">
+			</div>
+			<h1 class="b-title uk-margin-remove">{{estado}}</h1>
 		</div>
 	</div>
+</div>
+<div class="uk-grid" id="estado-stats" data-uk-grid-match>
+	<a class="uk-width-1-1 estado-section" href="{% url 'unsearch:estado' pk=estado.pk %}">
+		<div class="uk-panel uk-text-center vertical-flex">
+			<div class="uk-panel-title"><i class="uk-icon-chevron-left"></i> Ver todas las universidades</div>
+		</div>
+	</a>
+</div>
+<div id="buscador-estado">
+	<form class="uk-form" method="POST">
+		{% csrf_token %}
+		<div class="uk-form-row">
+			<input class="uk-form-large" autofocus name="busqueda" value="{{busqueda}}" onfocus="this.value = this.value;" placeholder="Buscar carrera en {{estado}}">
+		</div>
+	</form>
 </div>
 
 {% regroup universidades by tipo as tipo_list %}
 
-<div class="bloque-contenido" id="lista-universidades">
-	<div class="fn-center fn-18 mb-50">
-		<a href="{% url 'unsearch:estado' pk=estado.pk %}"><i class="uk-icon-arrow-left"></i> Todas las universidades de {{estado}}</a>
-	</div>
-	
+<div class="bloque-contenido" id="lista-universidades">	
 	<!-- Accordion -->
 	<div class="uk-accordion tarjetas" data-uk-accordion="{collapse: false}">
 		{% for tipo in tipo_list %}

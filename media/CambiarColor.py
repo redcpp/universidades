@@ -8,7 +8,7 @@ for img_file in glob.glob('*.png'):
 	''' Image must be PNG '''
 	im = Image.open(img_file, 'r')
 	pix_vals = list(im.getdata())
-	rgb_values = 243,243,243
+	rgb_values = 255,255,255
 
 	position=0
 	for rgba in pix_vals:

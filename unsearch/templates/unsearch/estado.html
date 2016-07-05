@@ -5,32 +5,41 @@
 	{% include "unsearch/parts/navbar.html" %}
 {% endblock nav-global %}
 
-{# {% block bodyclass %}bg-content{% endblock bodyclass %} #}
-
 {% block content %}
 <div class="bg-estado">
-	<div id="bloque-estado" class="simple-blur mb-10">
-		<h2 class="b-title mb-30 fn-center fn-42 fn-light">{{estado}}</h2>
-		<div class="uk-grid grid-reset">
-			<div class="uk-width-1-2 uk-hidden-small fn-center"><img src="{{MEDIA_URL}}{{estado.imagen.url}}" alt="{{MEDIA_URL}}{{estado.imagen.url}}"></div>
-			<div class="uk-width-medium-1-2 uk-width-small-1-1 vertical-flex fn-18 fn-light">
-				<ul class="uk-list">
-					<li class="uk-list-line"><i class="uk-icon-line-chart"></i> <b>{{estado.universidades.count}}</b> Universidades</li>
-					<li class="uk-list-line"><i class="uk-icon-signal"></i> <b>{{carreras}}</b> Programas de estudio</li>
-					<li class="uk-list-line"><i class="uk-icon-pie-chart"></i> <b>{{estado.municipios}}</b> Municipios</li>
-				</ul>
-			</div>
-		</div>
+	<div id="bloque-estado" class="simple-blur vertical-flex">
 		<div class="fn-center">
-			<form class="buscador-principal" method="POST" action="{% url 'unsearch:estado_buscar' pk=estado.pk %}">
-				{% csrf_token %}
-				<div class="uk-form-icon">
-					<input type="text" name="busqueda" placeholder="Buscar carrera en {{estado}}" autofocus>
-				</div>
-				<button><i class="uk-icon-paper-plane"></i></button>
-			</form>
+			<div class="draw-circle vertical-flex">
+				<img src="{{MEDIA_URL}}{{estado.imagen.url}}" alt="{{MEDIA_URL}}{{estado.imagen.url}}" class="estado-img">
+			</div>
+			<h1 class="b-title uk-margin-remove">{{estado}}</h1>
 		</div>
 	</div>
+</div>
+<div class="uk-grid" id="estado-stats" data-uk-grid-match>
+	<div class="uk-width-medium-1-3 estado-section">
+		<div class="uk-panel uk-text-center vertical-flex">
+			<div class="uk-panel-title"><span class="resalte"><i class="uk-icon-map-signs"></i></span><br>{{estado.municipios}} Municipios</div>
+		</div>
+	</div>
+	<div class="uk-width-medium-1-3 estado-section">
+		<div class="uk-panel uk-text-center vertical-flex">
+			<div class="uk-panel-title"><span class="resalte"><i class="uk-icon-university"></i></span><br>{{estado.universidades.count}} Universidades</div>
+		</div>
+	</div>
+	<div class="uk-width-medium-1-3 estado-section">
+		<div class="uk-panel uk-text-center vertical-flex">
+			<div class="uk-panel-title"><span class="resalte"><i class="uk-icon-list"></i></span><br>{{carreras}} Programas de estudio</div>
+		</div>
+	</div>
+</div>
+<div id="buscador-estado">
+	<form class="uk-form" method="POST" action="{% url 'unsearch:estado_buscar' pk=estado.pk %}">
+		{% csrf_token %}
+		<div class="uk-form-row">
+			<input class="uk-form-large" name="busqueda" placeholder="Buscar carrera en {{estado}}" autofocus>
+		</div>
+	</form>
 </div>
 
 {% regroup universidades by tipo as tipo_list %}

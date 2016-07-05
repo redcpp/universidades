@@ -29,7 +29,7 @@ def estado_buscar(request, pk):
 			return redirect('unsearch:estado', pk=pk)
 		estado = get_object_or_404(Estado, pk=pk)
 		num_carreras = Carrera.objects.filter(universidad__estado__pk=pk).count
-		root = stemmer.stem(_s)
+		root = stemmer.stem(_s.strip())
 		universidades = Universidad.objects.distinct().filter( Q(estado__pk=pk) & Q(carreras__nombre__icontains=root) ).annotate(matches=F('carreras__nombre'))
 		# registro_de_busquedas(_s, root, estado, len(universidades))
 		return render(request,'unsearch/busqueda_estado.html', {'estado':estado, 'carreras':num_carreras, 'universidades':universidades, 'busqueda':_s})

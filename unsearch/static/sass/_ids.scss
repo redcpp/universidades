@@ -5,15 +5,14 @@
 }
 
 #quick-stats {
-	background: #fff url('../img/mountains.jpg') no-repeat center top;
-	background-size: cover;
 	border: 2px solid rgba(0,0,0,1);
+	border-left: none;
+	border-right: none;
 	&.uk-grid-divider {
 		margin: 0;
 		div { padding: 0; border-color: #303F9F; }
 	}
 	.uk-panel {
-		// background:  #3F51B5;
 		height: 150px;
 		.uk-panel-title {
 			color: rgba(255,255,255,.8);
@@ -27,49 +26,106 @@
 	}
 }
 
-#bloque-estado { 
-	padding-top: 30px;
-	padding-bottom: 30px;
-	text-shadow: .2px .2px 1px #000;
-	.bloque-espacio { padding: 0 20px; }
-	.b-title {
-		letter-spacing: 1.2px;
-		text-shadow: .5px .5px 2px #000;
+#estado-stats {
+	@extend #quick-stats;
+	border: none;
+	background-color: #B0BEC5;
+	.uk-panel {
+		height: 125px;
+		.uk-panel-title {
+			color: rgba(0,0,0,1);
+			.resalte {
+				color: rgba(0,0,0,1);
+				font-size: 28px;
+				i { padding-bottom: 10px; }
+			}
+		}
 	}
-	img {
-		max-height: 175px;
-		max-width: 175px; 
+	.estado-section { 
+		padding-left: 0;
+		text-decoration: none;
+		-webkit-transition: background-color .3s; /* Safari */
+		transition: background-color .3s;
+	}
+	a.estado-section:hover { background-color: #CFD8DC; }
+}
+
+#uni-stats {
+	@extend #quick-stats;
+	border: none;
+	background-color: $color-navy;
+	.uk-panel {
+		height: 125px;
+		padding: 10px;
+		.uk-panel-title {
+			color: rgba(255,255,255,.9);
+			.resalte {
+				font-size: 28px;
+				i { padding-bottom: 10px; }
+			}
+		}
+	}
+	.uni-section { 
+		padding-left: 0;
+		text-decoration: none;
+		-webkit-transition: background-color .3s; /* Safari */
+		transition: background-color .3s;
+	}
+	a.uni-section:nth-child(1):hover { background-color: #009688; }
+	a.uni-section:nth-child(2):hover { background-color: #03A9F4; }
+	a.uni-section:nth-child(3):hover { background-color: #3F51B5; }
+	a.uni-section:nth-child(4):hover { background-color: #9C27B0; }
+	a.uni-section:nth-child(4), a.uni-section:nth-child(4):hover { word-break: break-all; }
+}
+
+#bloque-estado {
+	min-height: 250px;
+	padding-top: 50px;
+	padding-bottom: 50px;
+	text-shadow: 4px 4px 8px #000;
+	.b-title {
+		color: #fff;
+		font-size: 5em;
+		line-height: 1em;
+		padding-top: 5px;
+	}
+	.draw-circle {
+		height: 150px;
+		width: 150px;
+		margin: auto;
+		border-radius: 50%;
+		background-color: rgba(230,74,25, .8);
 		-ms-filter: "progid:DXImageTransform.Microsoft.Dropshadow(OffX=3, OffY=3, Color='#444')";
 		filter: "progid:DXImageTransform.Microsoft.Dropshadow(OffX=3, OffY=3, Color='#444')";
 		-webkit-filter: drop-shadow(3px 3px 6px rgba(0,0,0,0.3));
 		filter: url(#drop-shadow);
-	}
-	li {
-		margin-bottom: 30px;
-		i { margin-right: 20px; }
-	}
-	li:last-child { margin-bottom: 0; }
-	.buscador-principal {
-		margin-top: 50px;
-		margin-bottom: 20px;
-		.uk-form-icon { max-width: 600px; }
+		img {
+			max-width: 100px;
+			max-height: 100px;
+			margin: auto;
+		}
 	}
 }
 
 #bloque-universidad { 
+	min-height: 250px;
 	padding-top: 30px;
 	padding-bottom: 30px;
-	.bloque-espacio { padding: 0 20px; }
-	.uk-grid {margin: 0;}
-	.b-title {
-		letter-spacing: 1.2px;
-		text-shadow: .5px .5px 2px #000;
+}
+
+#buscador-estado {
+	padding: 40px 20px;
+	background-color: rgb(242, 242, 242);
+	form {
+		width: 100%;
+		max-width: $medium;
+		margin: auto;
+		&:before { color: #000; font-size: 20px; }
+		input {
+			color: #000;
+			width: 100%;
+		}
 	}
-	li {
-		margin-bottom: 30px;
-		i { margin-right: 20px; }
-	}
-	li:last-child { margin-bottom: 0; }
 }
 
 #carreras {
@@ -99,17 +155,6 @@
 
 	#map-mexico { display: none; }
 
-	#bloque-universidad { 
-		.b-title {
-			margin-bottom: 30px;
-			color: #000;
-			text-shadow: .5px .5px 2px #fff;
-		}
-		.uk-list-line {
-			color: #000;
-		}
-	}
-
 	#lista-universidades { .uni { padding: 5px; } }
 
 	#carreras {
@@ -122,20 +167,22 @@
 	}
 }
 
-@media (max-width: $medium - 1) {
-	#bloque-universidad { 
-		.b-title {
-			margin-bottom: 10px;
-		}
-	}
-}
-
 @media (min-width: $small + 1) and (max-width: $medium) {
 	#carreras {
 		ul {
 			columns: 2;
 			-webkit-columns: 2;
 			-moz-columns: 2;
+		}
+	}
+}
+
+@media (max-width: $medium - 1) {
+	#uni-stats {
+		.uni-section {
+			-moz-box-shadow: none;
+			-webkit-box-shadow: none;
+			box-shadow: none;
 		}
 	}
 }

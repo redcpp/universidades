@@ -11,23 +11,20 @@
 	background-color: $color-background;
 }
 
-.bg-top {
-	/* http://code2prog.com/ceystalhorizon-flat-design-wallpapers-hd-free-wallpapers-backgrounds-images-fhd-4k-download-2014-2015-2016/ */
-	background: #fff url('../img/formal.png') no-repeat center bottom;
+.bg-inicio {
+	background: $color-main url('../img/mountains.jpg') no-repeat center top;
 	background-size: cover;
-	border: 0;
 }
 
 .bg-estado {
-	/* http://dakoder.deviantart.com/art/MinFlat-Dark-Material-Design-Wallpaper-4K-509845098 */
-	background: #fff url('../img/material.jpg') no-repeat center top;
+	background: $color-main url('../img/duna.jpg') no-repeat center center;
 	background-size: cover;
 	border: 0;
 }
 
 .bg-universidad {
 	/* http://www.optawall.com/profile/1/ */
-	background: #fff url('../img/bluemountains.jpg') no-repeat center bottom;
+	background: $color-main url('../img/bluemountains.jpg') no-repeat center bottom;
 	background-size: cover;
 	border: 0;
 }
