@@ -16,6 +16,7 @@
 		</div>
 	</div>
 </div>
+
 <div class="uk-grid" id="estado-stats" data-uk-grid-match>
 	<div class="uk-width-medium-1-3 estado-section">
 		<div class="uk-panel uk-text-center vertical-flex">
@@ -33,38 +34,98 @@
 		</div>
 	</div>
 </div>
+
 <div id="buscador-estado">
 	<form class="uk-form" method="POST" action="{% url 'unsearch:estado_buscar' pk=estado.pk %}">
 		{% csrf_token %}
 		<div class="uk-form-row">
-			<input class="uk-form-large" name="busqueda" placeholder="Buscar carrera en {{estado}}" autofocus>
+			<input class="uk-form-large" name="busqueda" placeholder="Buscar carrera en {{estado}}">
 		</div>
 	</form>
 </div>
 
 {% regroup universidades by tipo as tipo_list %}
 
-<div class="bloque-contenido" id="lista-universidades">
-	<div class="uk-accordion" data-uk-accordion="{collapse: false}">
+<div id="filtros">
+	<div class="chip active" chip="todo">Todo</div>
 	{% for tipo in tipo_list %}
-		<button class="uk-accordion-title">
-			<span class="pr-5">{{tipo.grouper}}</span>
-			<span class="uk-text-small uk-hidden-small">Instituciones: <b>{{tipo.list|length}}</b></span>
-		</button>
-		<div class="uk-accordion-content">
-			<div class="uk-grid uk-grid-margin">
-			{% for universidad in tipo.list %}
-				<article class="uk-width-1-1 uk-comment">
-					<a class="uk-comment-header" href="{% url 'unsearch:universidad' pk=universidad.pk %}">
-						<h4 class="uk-comment-title">{{universidad|title}}</h4>
-						<div class="uk-comment-meta">Programas: <b>{{universidad.carreras.count}}</b></div>
-					</a>
-				</article>
-			{% endfor %}
-			</div>
+		<div class="chip" chip="{{tipo.grouper}}">{{tipo.grouper}}</div>
+	{% endfor %}
+</div>
+
+<form id="live-search" class="uk-form uk-text-center" action="" method="post">
+	<input type="text" id="buscador-live" class="uk-form-width-large uk-form-large shadow-1" value="" placeholder="Buscar universidad">
+</form>
+
+<div class="uk-container uk-container-center">
+	<div id="lista-unis" class="uk-margin-large-bottom">
+	{% for tipo in tipo_list %}
+		<div class="bloque-unis" bloque-uni="{{tipo.grouper}}">
+			<h3 class="uk-margin-bottom-remove">{{tipo.grouper}}</h3>
+			<ul class="uk-list uk-list-line pl-30 unis">
+				{% for universidad in tipo.list %}
+					<li>
+						<a href="{% url 'unsearch:universidad' pk=universidad.pk %}">
+							{{universidad|title}}
+							<span class="uk-hidden-small uk-text-small uk-text-muted floatr">Carreras: <b>{{universidad.carreras.count}}</b></span>
+						</a>
+					</li>
+				{% endfor %}
+			</ul>
 		</div>
 	{% endfor %}
 	</div>
 </div>
 
 {% endblock content %}
+
+{% block heavyjs %}
+<script type="text/javascript">
+$(document).ready(function(){
+
+	/* Filtros */
+	$('.chip').click(function(){
+		var thechosenone = this;
+		var thebloque = $(this).attr('chip');
+		$('#filtros').children('.chip').each(function() {
+			if (this == thechosenone) {
+				$(this).addClass('active');
+			} else {
+				$(this).removeClass('active');
+			}
+		});
+		if (thebloque == 'todo') {
+			$('#lista-unis').children('.bloque-unis').each(function() {
+				$(this).show();
+			});
+		} else {
+			$('#lista-unis').children('.bloque-unis').each(function() {
+				if ($(this).attr('bloque-uni') == thebloque) {
+					$(this).show();
+				} else {
+					$(this).hide();
+				}
+			});
+		}
+	});
+
+	/* Buscador preveer submit */
+	$('#live-search').submit(function(e){
+		e.preventDefault();
+	});
+	
+	/* Buscador en vivo */
+	$('#buscador-live').keyup(function(){
+		var filtro = $(this).val();
+		$('.unis li').each(function() {
+			// Si no contiene el filtro, fade out
+			if ($(this).text().search(new RegExp(filtro, 'i')) < 0) {
+				$(this).fadeOut();
+			} else {
+				$(this).show();
+			}
+		});
+	});
+});
+</script>
+{% endblock heavyjs %}

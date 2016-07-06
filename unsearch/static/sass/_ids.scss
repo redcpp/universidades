@@ -115,7 +115,7 @@
 
 #buscador-estado {
 	padding: 40px 20px;
-	background-color: rgb(242, 242, 242);
+	background-color: #ecf0f1;
 	form {
 		width: 100%;
 		max-width: $medium;
@@ -124,6 +124,58 @@
 		input {
 			color: #000;
 			width: 100%;
+			&::-webkit-input-placeholder {
+				color: rgba(0,0,0,.8);
+			}
+		}
+	}
+}
+
+#filtros {
+	margin: 20px auto;
+	margin-top: 50px;
+	padding: 0 30px;
+	width: 100%;
+	text-align: center;
+	.chip{
+		display: inline-block;
+		font-size: 1em;
+		color: rgba(0,0,0,0.8);
+		background-color: #ECEFF1;
+		margin: 7px 10px;
+		padding: 0 20px;
+		height: 35px;
+		line-height: 35px;
+		border-radius: 20px;
+		box-shadow: 0px 3px 1px -2px rgba(0, 0, 0, .2),
+					0px 2px 2px 0px rgba(0, 0, 0, .2),
+					0px 1px 5px 0px rgba(0, 0, 0, .2);
+		&:hover {
+			cursor: pointer;
+			box-shadow: 0px 2px 4px -1px rgba(0, 0, 0, .2),
+						0px 4px 5px 0px rgba(0, 0, 0, .2),
+						0px 1px 10px 0px rgba(0, 0, 0,.2);
+		}
+		&.active {
+			color: white;
+			background-color: #0050ef;
+		}
+	}
+}
+
+#live-search {
+	margin-top: 10px;
+	margin-bottom: -15px;
+	padding: 0 20px;
+}
+
+#lista-unis {
+	.bloque-unis { margin-top: 50px; }
+	.unis {
+		li {
+			margin-top: 7px;
+			padding-top: 7px;
+			a:hover span { color: #059 !important; }
 		}
 	}
 }
@@ -156,6 +208,8 @@
 	#map-mexico { display: none; }
 
 	#lista-universidades { .uni { padding: 5px; } }
+
+	#filtros .chip { margin: 10px auto; display: block; }
 
 	#carreras {
 		padding: 30px 15px;

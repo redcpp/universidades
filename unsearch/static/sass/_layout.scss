@@ -120,6 +120,10 @@
 	align-self: flex-end;
 }
 
+.floatr {
+	float: right;
+}
+
 @media (max-width: $small) {
 	.bloque-contenido { padding: 30px 15px; }
 }
