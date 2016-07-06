@@ -6,10 +6,6 @@
 	{% include "unsearch/parts/navbar.html" %}
 {% endblock nav-global %}
 
-{% block bodyclass %}
-	bg-content
-{% endblock bodyclass %}
-
 {% block content %}
 <div class="bg-estado">
 	<div id="bloque-estado" class="simple-blur vertical-flex">
@@ -35,6 +31,7 @@
 			<input class="uk-form-large" autofocus name="busqueda" value="{{busqueda}}" onfocus="this.value = this.value;" placeholder="Buscar carrera en {{estado}}">
 		</div>
 	</form>
+	<p class="uk-text-center uk-margin-bottom-remove"><b>Coincidencias: {{num_resultados}}</b></p>
 </div>
 
 {% regroup universidades by tipo as tipo_list %}
@@ -54,24 +51,21 @@
 	<div id="lista-unis" class="uk-margin-large-bottom">
 	{% for tipo in tipo_list %}
 		<div class="bloque-unis" bloque-uni="{{tipo.grouper}}">
-			<h3 class="fn-center fn-2em mt-30 mb-20">{{tipo.grouper}}</h3>
+			<h3>{{tipo.grouper}}</h3>
 			{% regroup tipo.list by nombre as list_universidades %}
-			<div class="uk-grid uk-grid-margin uk-flex unis" data-uk-grid-match="{target:'.tarjeta'}">
+			<ul class="uk-list uk-list-line pl-30 unis">
 				{% for universidad in list_universidades|ordenar_matches %}
-					<div class="uk-width-medium-1-2 tarjeta-contenedor">
-						<article class="uk-comment tarjeta shadow-1">
-							<a class="uk-comment-header" href="{% url 'unsearch:universidad' pk=universidad.list.0.pk %}">
-								<h4 class="uk-comment-title">{{universidad.grouper|title}}</h4>
-							</a>
-							<div class="uk-comment-body">
-								{% for resultado in universidad.list|dictsort:"matches" %}
-									<p>{{resultado.matches}}</p>
-								{% endfor %}
-							</div>
-						</article>
-					</div>
+					<li data-uk-tooltip title="{{universidad.list|length}} Coincidencias">
+						<a href="{% url 'unsearch:universidad' pk=universidad.list.0.pk %}">{{universidad.grouper|title}}</a>
+						<a class="floatr desplegar"><i class="uk-icon-chevron-down"></i></a>
+						<ul class="uk-list matches">
+							{% for resultado in universidad.list|dictsort:"matches" %}
+								<li>{{resultado.matches}}</li>
+							{% endfor %}
+						</ul>
+					</li>
 				{% endfor %}
-			</div>
+			</ul>
 		</div>
 	{% endfor %}
 	</div>
@@ -82,6 +76,15 @@
 {% block heavyjs %}
 <script type="text/javascript">
 $(document).ready(function(){
+	/* Esconder matches */
+	$('.matches').each(function() {
+		$(this).hide();
+	});
+
+	/* Desplegar o retractar matches */
+	$('.desplegar').click(function() {
+		$(this).next('.matches').slideToggle();
+	});
 
 	/* Filtros */
 	$('.chip').click(function(){
@@ -96,14 +99,14 @@ $(document).ready(function(){
 		});
 		if (thebloque == 'todo') {
 			$('#lista-unis').children('.bloque-unis').each(function() {
-				$(this).show();
+				$(this).fadeIn();
 			});
 		} else {
 			$('#lista-unis').children('.bloque-unis').each(function() {
 				if ($(this).attr('bloque-uni') == thebloque) {
-					$(this).show();
+					$(this).fadeIn();
 				} else {
-					$(this).hide();
+					$(this).fadeOut();
 				}
 			});
 		}

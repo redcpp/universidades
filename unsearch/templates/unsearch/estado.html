@@ -95,14 +95,14 @@ $(document).ready(function(){
 		});
 		if (thebloque == 'todo') {
 			$('#lista-unis').children('.bloque-unis').each(function() {
-				$(this).show();
+				$(this).fadeIn();
 			});
 		} else {
 			$('#lista-unis').children('.bloque-unis').each(function() {
 				if ($(this).attr('bloque-uni') == thebloque) {
-					$(this).show();
+					$(this).fadeIn();
 				} else {
-					$(this).hide();
+					$(this).fadeOut();
 				}
 			});
 		}
