@@ -39,7 +39,7 @@
 	<form class="uk-form" method="POST" action="{% url 'unsearch:estado_buscar' pk=estado.pk %}">
 		{% csrf_token %}
 		<div class="uk-form-row">
-			<input class="uk-form-large" name="busqueda" placeholder="Buscar carrera en {{estado}}">
+			<input class="uk-form-large" name="busqueda" placeholder="Buscar carrera en {{estado}}" autofocus="">
 		</div>
 	</form>
 </div>
@@ -125,6 +125,7 @@ $(document).ready(function(){
 			}
 		});
 	});
+
 });
 </script>
 {% endblock heavyjs %}

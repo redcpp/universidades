@@ -24,12 +24,12 @@ def estado(request, pk):
 
 def estado_buscar(request, pk):
 	if request.method == 'POST':
-		_s = request.POST.get('busqueda')
+		_s = request.POST.get('busqueda').strip()
 		if _s == '':
 			return redirect('unsearch:estado', pk=pk)
 		estado = get_object_or_404(Estado, pk=pk)
-		root = stemmer.stem(_s.strip())
-		universidades = Universidad.objects.distinct().filter( Q(estado__pk=pk) & Q(carreras__nombre__icontains=root) ).annotate(matches=F('carreras__nombre'))
+		root = stemmer.stem(_s)
+		universidades = Universidad.objects.distinct().filter( Q(estado__pk=pk) & (Q(carreras__nombre__icontains=root) | Q(carreras__nombre__icontains=_s)) ).annotate(matches=F('carreras__nombre'))
 		# registro_de_busquedas(_s, root, estado, len(universidades))
 		return render(request,'unsearch/busqueda_estado.html', {'estado':estado, 'universidades':universidades, 'busqueda':_s, 'num_resultados':len(universidades)})
 	else:

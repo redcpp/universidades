@@ -12,7 +12,7 @@
 	<link rel="stylesheet" type="text/css" href="{% static "css/components/sticky.css" %}" />
 	<link rel="stylesheet" type="text/css" href="{% static "css/components/search.css" %}" />
 	<link rel="stylesheet" type="text/css" href="{% static "css/main.css" %}" />
-	<link rel="stylesheet" type="text/css" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.6.3/css/font-awesome.min.css">
+	<link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.6.3/css/font-awesome.min.css">
 	{% block extrastyle %}{% endblock %}
 	{% if LANGUAGE_BIDI %}<link rel="stylesheet" type="text/css" href="{% block stylesheet_rtl %}{% static "admin/css/rtl.css" %}{% endblock %}" />{% endif %}
 
@@ -20,7 +20,7 @@
 	<script type="text/javascript" src="{% static "js/uikit.min.js" %}"></script>
 	<script type="text/javascript" src="{% static "js/components/sticky.js" %}"></script>
 	<script type="text/javascript" src="{% static "js/components/accordion.js" %}"></script>
-	<link rel="stylesheet" type="text/css" href="{% static "js/components/search.js" %}" />
+	<script type="text/javascript" src="{% static "js/components/search.js" %}"></script>
 	{% block extrahead %}{% endblock %}
 	<meta name="robots" content="NONE,NOARCHIVE" />
 

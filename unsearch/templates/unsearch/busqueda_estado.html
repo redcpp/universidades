@@ -54,10 +54,9 @@
 			<h3>{{tipo.grouper}}</h3>
 			{% regroup tipo.list by nombre as list_universidades %}
 			<ul class="uk-list uk-list-line pl-30 unis">
-				{% for universidad in list_universidades|ordenar_matches %}
-					<li data-uk-tooltip title="{{universidad.list|length}} Coincidencias">
-						<a href="{% url 'unsearch:universidad' pk=universidad.list.0.pk %}">{{universidad.grouper|title}}</a>
-						<a class="floatr desplegar"><i class="uk-icon-chevron-down"></i></a>
+				{% for universidad in list_universidades %}
+					<li>
+						<a href="{% url 'unsearch:universidad' pk=universidad.list.0.pk %}">{{universidad.grouper|title}}<span class="floatr"><i class="uk-icon-chevron-right"></i></span></a>
 						<ul class="uk-list matches">
 							{% for resultado in universidad.list|dictsort:"matches" %}
 								<li>{{resultado.matches}}</li>
@@ -76,16 +75,6 @@
 {% block heavyjs %}
 <script type="text/javascript">
 $(document).ready(function(){
-	/* Esconder matches */
-	$('.matches').each(function() {
-		$(this).hide();
-	});
-
-	/* Desplegar o retractar matches */
-	$('.desplegar').click(function() {
-		$(this).next('.matches').slideToggle();
-	});
-
 	/* Filtros */
 	$('.chip').click(function(){
 		var thechosenone = this;
