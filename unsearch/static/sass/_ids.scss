@@ -47,7 +47,7 @@
 		-webkit-transition: background-color .3s; /* Safari */
 		transition: background-color .3s;
 	}
-	a.estado-section:hover { background-color: #CFD8DC; }
+	a.estado-section:hover { background-color: #8C9EFF; }
 }
 
 #uni-stats {
@@ -170,7 +170,7 @@
 }
 
 #lista-unis {
-	.bloque-unis { margin-top: 50px; }
+	.bloque-unis { margin-top: 50px; h3 {color: black;} }
 	.unis {
 		li {
 			margin-top: 7px;

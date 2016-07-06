@@ -6,6 +6,10 @@
 	{% include "unsearch/parts/navbar.html" %}
 {% endblock nav-global %}
 
+{% block bodyclass %}
+	bg-content
+{% endblock bodyclass %}
+
 {% block content %}
 <div class="bg-estado">
 	<div id="bloque-estado" class="simple-blur vertical-flex">
@@ -35,35 +39,93 @@
 
 {% regroup universidades by tipo as tipo_list %}
 
-<div class="bloque-contenido" id="lista-universidades">	
-	<!-- Accordion -->
-	<div class="uk-accordion tarjetas" data-uk-accordion="{collapse: false}">
-		{% for tipo in tipo_list %}
-		<button class="uk-accordion-title intense">
-			<span class="pr-5">{{tipo.grouper}}</span>
-			<span class="uk-text-small uk-hidden-small">Coincidencias: <b>{{tipo.list|length}}</b></span>
-		</button>
-		<div class="uk-accordion-content">
+<div id="filtros">
+	<div class="chip active" chip="todo">Todo</div>
+	{% for tipo in tipo_list %}
+		<div class="chip" chip="{{tipo.grouper}}">{{tipo.grouper}}</div>
+	{% endfor %}
+</div>
+
+<form id="live-search" class="uk-form uk-text-center" action="" method="post">
+	<input type="text" id="buscador-live" class="uk-form-width-large uk-form-large shadow-1" value="" placeholder="Buscar universidad">
+</form>
+
+<div class="uk-container uk-container-center">
+	<div id="lista-unis" class="uk-margin-large-bottom">
+	{% for tipo in tipo_list %}
+		<div class="bloque-unis" bloque-uni="{{tipo.grouper}}">
+			<h3 class="fn-center fn-2em mt-30 mb-20">{{tipo.grouper}}</h3>
 			{% regroup tipo.list by nombre as list_universidades %}
-			<div class="uk-grid uk-grid-margin uk-flex uk-flex-center" data-uk-grid-match="{target:'.tarjeta'}">
+			<div class="uk-grid uk-grid-margin uk-flex unis" data-uk-grid-match="{target:'.tarjeta'}">
 				{% for universidad in list_universidades|ordenar_matches %}
-				<div class="uk-width-medium-1-2 uk-margin-bottom">
-					<article class="uk-comment tarjeta shadow-2">
-						<a class="uk-comment-header" href="{% url 'unsearch:universidad' pk=universidad.list.0.pk %}">
-							<h4 class="uk-comment-title uk-margin-bottom">{{universidad.grouper|title}}</h4>
-						</a>
-						<div class="uk-comment-body">
-							{% for resultado in universidad.list|dictsort:"matches" %}
-								<p>{{resultado.matches}}</p>
-							{% endfor %}
-						</div>
-					</article>
-				</div>
+					<div class="uk-width-medium-1-2 tarjeta-contenedor">
+						<article class="uk-comment tarjeta shadow-1">
+							<a class="uk-comment-header" href="{% url 'unsearch:universidad' pk=universidad.list.0.pk %}">
+								<h4 class="uk-comment-title">{{universidad.grouper|title}}</h4>
+							</a>
+							<div class="uk-comment-body">
+								{% for resultado in universidad.list|dictsort:"matches" %}
+									<p>{{resultado.matches}}</p>
+								{% endfor %}
+							</div>
+						</article>
+					</div>
 				{% endfor %}
 			</div>
 		</div>
-		{% endfor %}
+	{% endfor %}
 	</div>
 </div>
 
 {% endblock content %}
+
+{% block heavyjs %}
+<script type="text/javascript">
+$(document).ready(function(){
+
+	/* Filtros */
+	$('.chip').click(function(){
+		var thechosenone = this;
+		var thebloque = $(this).attr('chip');
+		$('#filtros').children('.chip').each(function() {
+			if (this == thechosenone) {
+				$(this).addClass('active');
+			} else {
+				$(this).removeClass('active');
+			}
+		});
+		if (thebloque == 'todo') {
+			$('#lista-unis').children('.bloque-unis').each(function() {
+				$(this).show();
+			});
+		} else {
+			$('#lista-unis').children('.bloque-unis').each(function() {
+				if ($(this).attr('bloque-uni') == thebloque) {
+					$(this).show();
+				} else {
+					$(this).hide();
+				}
+			});
+		}
+	});
+
+	/* Buscador preveer submit */
+	$('#live-search').submit(function(e){
+		e.preventDefault();
+	});
+	
+	/* Buscador en vivo */
+	$('#buscador-live').keyup(function(){
+		var filtro = $(this).val();
+		$('.unis .tarjeta-contenedor').each(function() {
+			// Si no contiene el filtro, fade out
+			if ($(this).find('.uk-comment-header').text().search(new RegExp(filtro, 'i')) < 0) {
+				$(this).fadeOut();
+			} else {
+				$(this).show();
+			}
+		});
+	});
+});
+</script>
+{% endblock heavyjs %}
