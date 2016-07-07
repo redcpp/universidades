@@ -82,22 +82,22 @@
 	min-height: 250px;
 	padding-top: 50px;
 	padding-bottom: 50px;
-	text-shadow: 4px 4px 8px #000;
+	text-shadow: 4px 4px 8px rgba(236,239,241 ,.6);
 	.b-title {
-		color: #fff;
+		color: #000;
 		font-size: 5em;
 		line-height: 1em;
-		padding-top: 5px;
+		padding-top: 10px;
 	}
 	.draw-circle {
 		height: 150px;
 		width: 150px;
 		margin: auto;
 		border-radius: 50%;
-		background-color: rgba(230,74,25, .8);
-		-ms-filter: "progid:DXImageTransform.Microsoft.Dropshadow(OffX=3, OffY=3, Color='#444')";
-		filter: "progid:DXImageTransform.Microsoft.Dropshadow(OffX=3, OffY=3, Color='#444')";
-		-webkit-filter: drop-shadow(3px 3px 6px rgba(0,0,0,0.3));
+		background-color: rgba(96,125,139,.6);
+		-ms-filter: "progid:DXImageTransform.Microsoft.Dropshadow(OffX=3, OffY=3, Color='#222')";
+		filter: "progid:DXImageTransform.Microsoft.Dropshadow(OffX=3, OffY=3, Color='#222')";
+		-webkit-filter: drop-shadow(3px 3px 6px rgba(0,0,0,.8));
 		filter: url(#drop-shadow);
 		img {
 			max-width: 100px;
@@ -218,6 +218,8 @@
 	#lista-universidades { .uni { padding: 5px; } }
 
 	#filtros .chip { margin: 10px auto; display: block; }
+
+	#bloque-estado .b-title { font-size: 3em; }
 
 	#carreras {
 		padding: 30px 15px;

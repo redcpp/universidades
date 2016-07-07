@@ -55,7 +55,7 @@
 
 {% block content %}
 <div class="bg-main fn-center" id="main-map">
-	<h1 class="fn-light fn-48">Universidades</h1>
+	<h1 class="fn-light fn-48">CampEduca</h1>
 	<p class="fn-18 fn-light">Encuentra universidad y carrera</p>
 	<form class="buscador-principal">
 		<div class="uk-form-icon">
@@ -119,9 +119,31 @@
 	</div>
 </div>
 
-<div class="uk-container uk-container-center">
-	<div class="uk-block-large"></div>
-	<div class="uk-block-large"></div>
-	<div class="uk-block-large"></div>
+<div class="uk-block-large bg-background">
+	<div class="uk-container uk-container-center">
+		<div class="uk-grid uk-grid-match grid-reset" data-uk-grid-margin="">
+			<div class="uk-width-medium-1-3 uk-row-first tarjeta-rounded">
+				<div class="uk-panel shadow-2">
+					<div class="fn-black uk-text-center"><i class="uk-icon-large uk-icon-list-ol"></i></div>
+					<h3 class="fn-black uk-text-center fn-2em">Directorio</h3>
+					<p class="uk-text-justify fn-18">Descubre las carreras que ofrece la universidad de tu elección</p>
+				</div>
+			</div>
+			<div class="uk-width-medium-1-3 tarjeta-rounded">
+				<div class="uk-panel shadow-2">
+					<div class="fn-black uk-text-center"><i class="uk-icon-large uk-icon-search-plus"></i></div>
+					<h3 class="fn-black uk-text-center fn-2em">Buscador</h3>
+					<p class="uk-text-justify fn-18">Busca que universidades ofrecen la carrera que deseas estudiar</p>
+				</div>
+			</div>
+			<div class="uk-width-medium-1-3 tarjeta-rounded">
+				<div class="uk-panel shadow-2">
+					<div class="fn-black uk-text-center"><i class="uk-icon-large uk-icon-check-square"></i></div>
+					<h3 class="fn-black uk-text-center fn-2em">Test</h3>
+					<p class="uk-text-justify fn-18">Encuentra cuales son tus habilidades y que carreras te recomendamos</p>
+				</div>
+			</div>
+		</div>
+	</div>
 </div>
 {% endblock content %}

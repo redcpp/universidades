@@ -28,11 +28,19 @@
 			<div class="uk-panel-title"><span class="resalte"><i class="uk-icon-list"></i></span><br>{{carreras.count}} Programas de estudio</div>
 		</div>
 	</div>
-	<a class="uk-width-medium-1-4 uni-section" href="{{universidad.sitio_web|default:''}}" target="_blank">
+	{% if universidad.sitio_web %}
+	<a class="uk-width-medium-1-4 uni-section" href="{{universidad.sitio_web}}" target="_blank">
 		<div class="uk-panel uk-text-center vertical-flex">
-			<div class="uk-panel-title"><span class="resalte"><i class="uk-icon-link"></i></span><br>{{universidad.sitio_web|default:"Ninguno"}}</div>
+			<div class="uk-panel-title"><span class="resalte"><i class="uk-icon-link"></i></span><br>{{universidad.sitio_web}}</div>
 		</div>
 	</a>
+	{% else %}
+	<div class="uk-width-medium-1-4 uni-section">
+		<div class="uk-panel uk-text-center vertical-flex">
+			<div class="uk-panel-title"><span class="resalte"><i class="uk-icon-link"></i></span><br>Ningún link</div>
+		</div>
+	</div>
+	{% endif %}
 </div>
 
 {% regroup carreras by grado as nivel_estudios %}

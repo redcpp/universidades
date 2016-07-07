@@ -1,26 +1,12 @@
-.tarjeta-contenedor{
-	padding-left: 10px;
-	padding-right: 10px;
-	margin-bottom: 30px;
-}
 .tarjeta {
-	border-radius: 10px;
-	background-color: #fff;
-	.uk-comment-header {
-		text-decoration: none;
-		.uk-comment-title  {
-			color: #059;
-			text-align: center;
-			padding: 15px 5px;
-			margin: 0;
-			border-radius: 10px 10px 0 0;
-			-webkit-transition: background-color .3s; /* Safari */
-			transition: background-color .3s;
-			&:hover { color: #1A237E; }
-		}
+	padding: 10px;
+	.uk-panel {
+		padding: 30px 20px;
+		background-color: #fff;
 	}
-	.uk-comment-body {
-		padding: 15px;
-		padding-top: 0;
-	}
+}
+
+.tarjeta-rounded {
+	@extend .tarjeta;
+	.uk-panel { border-radius: 10px; }
 }
