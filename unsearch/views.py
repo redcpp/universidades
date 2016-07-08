@@ -49,8 +49,8 @@ def buscador_nacional(request):
 		if _s == '':
 			return redirect('unsearch:home')
 		root = stemmer.stem(_s)
-		carreras = Carrera.objects.distinct().filter( Q(nombre__icontains=root) | Q(nombre__icontains=_s) )
-		tipos = sorted([x['universidad__tipo'] for x in carreras.values('universidad__tipo')])
+		carreras = Carrera.objects.distinct().filter( Q(nombre__icontains=root) | Q(nombre__icontains=_s) ).order_by('universidad__estado__nombre')
+		tipos = sorted([x['universidad__tipo'] for x in carreras.order_by('universidad__tipo').values('universidad__tipo')])
 		# registro_de_busquedas(_s, root, estado, len(carreras))
 		return render(request,'unsearch/busqueda_nacional.html', {'carreras':carreras, 'busqueda':_s, 'tipos':tipos, 'num_resultados':len(carreras)})
 	else:

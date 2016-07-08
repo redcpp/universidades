@@ -57,7 +57,7 @@
 					<li class="universidad">
 						<a class="nombre-universidad" href="{% url 'unsearch:universidad' pk=universidad.grouper.pk %}">{{universidad.grouper|title}}<span class="floatr"><i class="uk-icon-chevron-right"></i></span></a>
 						<ul class="uk-list matches">
-							{% for resultado in universidad.list %}
+							{% for resultado in universidad.list|dictsort:"nombre" %}
 								<li>{{resultado}}</li>
 							{% endfor %}
 						</ul>

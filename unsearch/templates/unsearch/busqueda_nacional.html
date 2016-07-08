@@ -29,7 +29,7 @@
 		<div class="chipsec" chip="{{estado.grouper}}">{{estado.grouper}}</div>
 	{% endfor %}
 	<hr>
-	<div class="chip active" chip="todo">Todos los tipos</div>
+	<div class="chip active" chip="todo">Todos</div>
 	{% for tipo in tipos %}
 		<div class="chip" chip="{{tipo}}">{{tipo}}</div>
 	{% endfor %}
@@ -43,7 +43,7 @@
 <div id="buscador-nacional" class="bloque">
 	{% for estado in estado_list %}
 	<div class="estado" bloque-estado="{{estado.grouper}}">
-		<h2 class="uk-text-center fn-2em">{{estado.grouper}}</h2>
+		<h2 class="uk-text-center fn-2em fn-black">{{estado.grouper}}</h2>
 		{% regroup estado.list by universidad.tipo as tipo_list %}
 		<div class="uk-container uk-container-center">
 			<div id="lista-unis" class="uk-margin-large-bottom lista-unis">
@@ -56,7 +56,7 @@
 							<li class="universidad">
 								<a class="nombre-universidad" href="{% url 'unsearch:universidad' pk=universidad.grouper.pk %}">{{universidad.grouper|title}}<span class="floatr"><i class="uk-icon-chevron-right"></i></span></a>
 								<ul class="uk-list matches">
-									{% for resultado in universidad.list %}
+									{% for resultado in universidad.list|dictsort:"nombre" %}
 										<li>{{resultado}}</li>
 									{% endfor %}
 								</ul>
