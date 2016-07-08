@@ -1,6 +1,5 @@
 {% extends "unsearch/parts/base.html" %}
 {% load staticfiles %}
-{% load my_tags %}
 
 {% block nav-global %}
 	{% include "unsearch/parts/navbar.html" %}
@@ -24,7 +23,7 @@
 		</div>
 	</a>
 </div>
-<div id="buscador-estado">
+<div id="buscador">
 	<form class="uk-form" method="POST">
 		{% csrf_token %}
 		<div class="uk-form-row">
@@ -34,7 +33,7 @@
 	<p class="uk-text-center uk-margin-bottom-remove"><b>Coincidencias: {{num_resultados}}</b></p>
 </div>
 
-{% regroup universidades by tipo as tipo_list %}
+{% regroup carreras by universidad.tipo as tipo_list %}
 
 <div id="filtros">
 	<div class="chip active" chip="todo">Todo</div>
@@ -52,14 +51,14 @@
 	{% for tipo in tipo_list %}
 		<div class="bloque-unis" bloque-uni="{{tipo.grouper}}">
 			<h3>{{tipo.grouper}}</h3>
-			{% regroup tipo.list by nombre as list_universidades %}
+			{% regroup tipo.list by universidad as list_universidades %}
 			<ul class="uk-list uk-list-line pl-30 unis">
 				{% for universidad in list_universidades %}
-					<li>
-						<a href="{% url 'unsearch:universidad' pk=universidad.list.0.pk %}">{{universidad.grouper|title}}<span class="floatr"><i class="uk-icon-chevron-right"></i></span></a>
+					<li class="universidad">
+						<a class="nombre-universidad" href="{% url 'unsearch:universidad' pk=universidad.grouper.pk %}">{{universidad.grouper|title}}<span class="floatr"><i class="uk-icon-chevron-right"></i></span></a>
 						<ul class="uk-list matches">
-							{% for resultado in universidad.list|dictsort:"matches" %}
-								<li>{{resultado.matches}}</li>
+							{% for resultado in universidad.list %}
+								<li>{{resultado}}</li>
 							{% endfor %}
 						</ul>
 					</li>
@@ -109,9 +108,9 @@ $(document).ready(function(){
 	/* Buscador en vivo */
 	$('#buscador-live').keyup(function(){
 		var filtro = $(this).val();
-		$('.unis .tarjeta-contenedor').each(function() {
+		$('.unis .universidad').each(function() {
 			// Si no contiene el filtro, fade out
-			if ($(this).find('.uk-comment-header').text().search(new RegExp(filtro, 'i')) < 0) {
+			if ($(this).find('.nombre-universidad').text().search(new RegExp(filtro, 'i')) < 0) {
 				$(this).fadeOut();
 			} else {
 				$(this).show();

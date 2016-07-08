@@ -57,9 +57,10 @@
 <div class="bg-main fn-center" id="main-map">
 	<h1 class="fn-light fn-48">CampEduca</h1>
 	<p class="fn-18 fn-light">Encuentra universidad y carrera</p>
-	<form class="buscador-principal">
+	<form class="buscador-principal" action="{% url 'unsearch:buscador_nacional' %}" method="post">
+		{% csrf_token %}
 		<div class="uk-form-icon">
-			<input type="text" name="" placeholder="Buscar carrera" autofocus>
+			<input class="input-principal" type="text" name="busqueda" placeholder="Buscar carrera" autofocus>
 		</div>
 		<button><i class="uk-icon-paper-plane"></i></button>
 	</form>
@@ -147,3 +148,18 @@
 	</div>
 </div>
 {% endblock content %}
+
+{% block heavyjs %}
+<script type="text/javascript">
+$(document).ready(function() {
+	$('.buscador-principal').submit(function(e) {
+		var input = $(this).find('.input-principal');
+		if (input.val().length != 0 && input.val().length < 3) {
+			e.preventDefault();
+			input.addClass('uk-form-danger');
+			UIkit.notify('La busqueda nacional debe contener más de 2 caracteres', {status:'danger'});
+		}
+	});
+});
+</script>
+{% endblock heavyjs %}

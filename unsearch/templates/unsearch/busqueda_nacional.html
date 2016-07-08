@@ -1,0 +1,160 @@
+{% extends "unsearch/parts/base.html" %}
+{% load staticfiles %}
+
+{% block nav-global %}
+	{% include "unsearch/parts/navbar.html" %}
+{% endblock nav-global %}
+
+{% block content %}
+<div class="bg-nacion">
+	<div id="bloque-nacional" class="simple-blur vertical-flex">
+		<h1 class="b-title uk-margin-remove uk-text-center">Estados Unidos Mexicanos</h1>
+	</div>
+</div>
+<div id="buscador">
+	<form class="uk-form buscador-principal" method="POST">
+		{% csrf_token %}
+		<div class="uk-form-row">
+			<input class="uk-form-large input-principal" autofocus name="busqueda" value="{{busqueda}}" onfocus="this.value = this.value;" placeholder="Buscar carrera en la nación">
+		</div>
+	</form>
+	<p class="uk-text-center uk-margin-bottom-remove"><b>Coincidencias: {{num_resultados}}</b></p>
+</div>
+
+{% regroup carreras by universidad.estado as estado_list %}
+
+<div id="filtros" class="filtros-estados">
+	<div class="chipsec active" chip="todo">{{estado_list|length}} estados</div>
+	{% for estado in estado_list %}
+		<div class="chipsec" chip="{{estado.grouper}}">{{estado.grouper}}</div>
+	{% endfor %}
+	<hr>
+	<div class="chip active" chip="todo">Todos los tipos</div>
+	{% for tipo in tipos %}
+		<div class="chip" chip="{{tipo}}">{{tipo}}</div>
+	{% endfor %}
+</div>
+
+
+<form id="national-live-search" class="uk-form uk-text-center" action="" method="post">
+	<input type="text" id="buscador-live" class="uk-form-width-large uk-form-large shadow-1" value="" placeholder="Buscar universidad">
+</form>
+
+<div id="buscador-nacional" class="bloque">
+	{% for estado in estado_list %}
+	<div class="estado" bloque-estado="{{estado.grouper}}">
+		<h2 class="uk-text-center fn-2em">{{estado.grouper}}</h2>
+		{% regroup estado.list by universidad.tipo as tipo_list %}
+		<div class="uk-container uk-container-center">
+			<div id="lista-unis" class="uk-margin-large-bottom lista-unis">
+			{% for tipo in tipo_list %}
+				<div class="tipo-unis" bloque-uni="{{tipo.grouper}}">
+					<h3>{{tipo.grouper}}</h3>
+					{% regroup tipo.list by universidad as list_universidades %}
+					<ul class="uk-list uk-list-line pl-30 unis">
+						{% for universidad in list_universidades %}
+							<li class="universidad">
+								<a class="nombre-universidad" href="{% url 'unsearch:universidad' pk=universidad.grouper.pk %}">{{universidad.grouper|title}}<span class="floatr"><i class="uk-icon-chevron-right"></i></span></a>
+								<ul class="uk-list matches">
+									{% for resultado in universidad.list %}
+										<li>{{resultado}}</li>
+									{% endfor %}
+								</ul>
+							</li>
+						{% endfor %}
+					</ul>
+				</div>
+			{% endfor %}
+			</div>
+		</div>
+	</div>
+	{% endfor %}
+</div>
+
+{% endblock content %}
+
+{% block heavyjs %}
+<script type="text/javascript">
+$(document).ready(function(){
+	/* Mensaje para búsquedas de 2 o menos caracteres */
+	$('.buscador-principal').submit(function(e) {
+		var input = $(this).find('.input-principal');
+		if (input.val().length < 3) {
+			e.preventDefault();
+			input.addClass('uk-form-danger');
+			UIkit.notify('La busqueda nacional debe contener más de 2 caracteres', {status:'danger'});
+		}
+	});
+
+	/* Filtrar estado */
+	$('.chipsec').click(function(){
+		var thechosenone = this;
+		var thebloque = $(this).attr('chip');
+		$('#filtros').children('.chipsec').each(function() {
+			if (this == thechosenone) {
+				$(this).addClass('active');
+			} else {
+				$(this).removeClass('active');
+			}
+		});
+		if (thebloque == 'todo') {
+			$('#buscador-nacional').children('.estado').each(function() {
+				$(this).fadeIn();
+			});
+		} else {
+			$('#buscador-nacional').children('.estado').each(function() {
+				if ($(this).attr('bloque-estado') == thebloque) {
+					$(this).fadeIn();
+				} else {
+					$(this).fadeOut();
+				}
+			});
+		}
+	});
+
+	/* Filtrar tipo */
+	$('.chip').click(function(){
+		var thechosenone = this;
+		var thebloque = $(this).attr('chip');
+		$('#filtros').children('.chip').each(function() {
+			if (this == thechosenone) {
+				$(this).addClass('active');
+			} else {
+				$(this).removeClass('active');
+			}
+		});
+		if (thebloque == 'todo') {
+			$('.lista-unis').children('.tipo-unis').each(function() {
+				$(this).fadeIn();
+			});
+		} else {
+			$('.lista-unis').children('.tipo-unis').each(function() {
+				if ($(this).attr('bloque-uni') == thebloque) {
+					$(this).fadeIn();
+				} else {
+					$(this).fadeOut();
+				}
+			});
+		}
+	});
+
+	/* Buscador preveer submit */
+	$('#national-live-search').submit(function(e){
+		e.preventDefault();
+	});
+	
+	/* Buscador en vivo */
+	$('#buscador-live').keyup(function(){
+		var filtro = $(this).val();
+		$('.unis .universidad').each(function() {
+			// Si no contiene el filtro, fade out
+			if ($(this).find('.nombre-universidad').text().search(new RegExp(filtro, 'i')) < 0) {
+				$(this).fadeOut();
+			} else {
+				$(this).show();
+			}
+		});
+	});
+});
+</script>
+{% endblock heavyjs %}

@@ -16,6 +16,12 @@
 	background-size: cover;
 }
 
+.bg-nacion {
+	background: $color-main url('../img/deer.jpg') no-repeat center center;
+	background-size: cover;
+	border: 0;
+}
+
 .bg-estado {
 	background: $color-main url('../img/white.jpg') no-repeat center top;
 	background-size: cover;

@@ -35,7 +35,7 @@
 	</div>
 </div>
 
-<div id="buscador-estado">
+<div id="buscador">
 	<form class="uk-form" method="POST" action="{% url 'unsearch:estado_buscar' pk=estado.pk %}">
 		{% csrf_token %}
 		<div class="uk-form-row">
@@ -81,7 +81,6 @@
 {% block heavyjs %}
 <script type="text/javascript">
 $(document).ready(function(){
-
 	/* Filtros */
 	$('.chip').click(function(){
 		var thechosenone = this;

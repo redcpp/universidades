@@ -4,6 +4,11 @@
 	h1 { letter-spacing: 1.5px; }
 }
 
+/*
+**
+** Estadísticas
+**
+*/
 #quick-stats {
 	border: 2px solid rgba(0,0,0,1);
 	border-left: none;
@@ -78,6 +83,23 @@
 	a.uni-section:nth-child(4), a.uni-section:nth-child(4):hover { word-break: break-all; }
 }
 
+/*
+**
+** Bloques
+**
+*/
+#bloque-nacional {
+	min-height: 250px;
+	padding-top: 50px;
+	padding-bottom: 50px;
+	.b-title {
+		color: #000;
+		font-size: 5em;
+		line-height: 1em;
+		padding-top: 10px;
+	}
+}
+
 #bloque-estado {
 	min-height: 250px;
 	padding-top: 50px;
@@ -113,9 +135,10 @@
 	padding-bottom: 30px;
 }
 
-#buscador-estado {
+#buscador {
 	padding: 40px 20px;
 	background-color: #ecf0f1;
+	b { color: black; }
 	form {
 		width: 100%;
 		max-width: $medium;
@@ -161,6 +184,16 @@
 			background-color: #0050ef;
 		}
 	}
+	.chipsec {
+		@extend .chip;
+		&.active { background-color: #008a00; }
+	}
+}
+
+#national-live-search {
+	margin-top: 40px;
+	margin-bottom: 10px;
+	padding: 0 20px;
 }
 
 #live-search {
