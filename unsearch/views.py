@@ -30,7 +30,7 @@ def estado_buscar(request, pk):
 		estado = get_object_or_404(Estado, pk=pk)
 		root = stemmer.stem(_s)
 		carreras = Carrera.objects.distinct().filter( Q(universidad__estado__pk=pk) & (Q(nombre__icontains=root) | Q(nombre__icontains=_s)) ) #.annotate(matches=F('carreras__nombre'))
-		# registro_de_busquedas(_s, root, estado, len(carreras))
+		registro_de_busquedas(_s, root, estado, len(carreras))
 		return render(request,'unsearch/busqueda_estado.html', {'estado':estado, 'carreras':carreras, 'busqueda':_s, 'num_resultados':len(carreras)})
 	else:
 		return redirect('unsearch:estado', pk=pk)
@@ -40,18 +40,22 @@ def universidad(request, pk):
 	carreras = Carrera.objects.filter(universidad__pk=pk).order_by('grado')
 	return render(request,'unsearch/universidad.html', {'carreras':carreras, 'universidad':universidad})
 
-def contacto(request):
-	return render(request, 'unsearch/contacto.html')
-
 def buscador_nacional(request):
 	if request.method == 'POST':
 		_s = request.POST.get('busqueda').strip()
 		if _s == '':
 			return redirect('unsearch:home')
+		estado = get_object_or_404(Estado, pk=127)
 		root = stemmer.stem(_s)
 		carreras = Carrera.objects.distinct().filter( Q(nombre__icontains=root) | Q(nombre__icontains=_s) ).order_by('universidad__estado__nombre')
 		tipos = sorted([x['universidad__tipo'] for x in carreras.order_by('universidad__tipo').values('universidad__tipo')])
-		# registro_de_busquedas(_s, root, estado, len(carreras))
+		registro_de_busquedas(_s, root, estado, len(carreras))
 		return render(request,'unsearch/busqueda_nacional.html', {'carreras':carreras, 'busqueda':_s, 'tipos':tipos, 'num_resultados':len(carreras)})
 	else:
 		return redirect('unsearch:home')
+
+def test(request):
+	return render(request, 'unsearch/test.html')
+
+def contacto(request):
+	return render(request, 'unsearch/contacto.html')

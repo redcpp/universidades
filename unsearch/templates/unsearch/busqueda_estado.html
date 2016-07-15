@@ -33,6 +33,7 @@
 	<p class="uk-text-center uk-margin-bottom-remove"><b>Coincidencias: {{num_resultados}}</b></p>
 </div>
 
+{% if carreras|length > 0 %}
 {% regroup carreras by universidad.tipo as tipo_list %}
 
 <div id="filtros">
@@ -68,6 +69,10 @@
 	{% endfor %}
 	</div>
 </div>
+{% else %}
+	<h2 class="uk-text-center">No hemos encontrado nada :(</h2>
+	<h3 class="uk-text-center">Intenta una búsqueda diferente</h3>
+{% endif %}
 
 {% endblock content %}
 

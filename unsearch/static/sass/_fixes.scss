@@ -28,3 +28,28 @@
 	background-color: rgba(0,0,0,.2);
 }
 
+// Test
+.uk-form-row {
+	border-top: 1px solid rgba(0,0,0,.3);
+	padding-top: 15px;
+	padding-bottom: 5px;
+	.uk-form-label {padding-right: 10px;}
+	.uk-form-controls-text {
+		margin-top: 3px;
+		margin-left: 5px;
+		label:first-child { margin-right: 5px; }
+	}
+	&:first-child { border: none; }
+}
+
+@media (min-width: 960px) {
+	.uk-form-horizontal .uk-form-label {
+		width: 350px;
+	}
+}
+
+@media (min-width: 1440px) {
+	.uk-form-horizontal .uk-form-label {
+		width: 450px;
+	}
+}

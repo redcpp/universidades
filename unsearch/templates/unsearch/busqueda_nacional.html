@@ -21,6 +21,7 @@
 	<p class="uk-text-center uk-margin-bottom-remove"><b>Coincidencias: {{num_resultados}}</b></p>
 </div>
 
+{% if carreras|length > 0 %}
 {% regroup carreras by universidad.estado as estado_list %}
 
 <div id="filtros" class="filtros-estados">
@@ -43,7 +44,7 @@
 <div id="buscador-nacional" class="bloque">
 	{% for estado in estado_list %}
 	<div class="estado" bloque-estado="{{estado.grouper}}">
-		<h2 class="uk-text-center fn-2em fn-black">{{estado.grouper}}</h2>
+		<h2 class="uk-text-center fn-2em fn-black"><a href="{% url 'unsearch:estado' pk=estado.grouper.pk %}">{{estado.grouper}}</a></h2>
 		{% regroup estado.list by universidad.tipo as tipo_list %}
 		<div class="uk-container uk-container-center">
 			<div id="lista-unis" class="uk-margin-large-bottom lista-unis">
@@ -70,6 +71,10 @@
 	</div>
 	{% endfor %}
 </div>
+{% else %}
+	<h2 class="uk-text-center">No hemos encontrado nada :(</h2>
+	<h3 class="uk-text-center">Intenta una búsqueda diferente</h3>
+{% endif %}
 
 {% endblock content %}
 

@@ -1,0 +1,704 @@
+{% extends "unsearch/parts/base.html" %}
+{% load staticfiles %}
+
+{% block nav-global %}
+	{% include "unsearch/parts/navbar.html" %}
+{% endblock nav-global %}
+
+{% block heavyjs %}
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.1.6/Chart.min.js"></script>
+<script type="text/javascript">
+$(document).ready(function() {
+	$('#resultados-test').hide();
+
+	// $('input[type=radio]').attr('checked',false);
+	$('#test').submit(function(e) {
+		e.preventDefault();
+		$(this).fadeOut();
+		$('#resultados-test').fadeIn();
+		
+		var areas = [0,0,0,0,0]
+		$('input[type=radio][value="si"]:checked').each(function() {
+			var radio_num = $(this).attr('name');
+			var area1 = ['4','9','12','20','28','31','35','39','43','46','50','65','67','68','75','77'];
+			var area2 = ['6','13','23','25','34','37','38','42','49','52','55','63','66','70','72','78'];
+			var area3 = ['5','10','15','19','21','26','29','33','36','44','53','56','59','62','71','80'];
+			var area4 = ['1','7','11','17','18','24','30','41','48','51','58','60','61','64','73','79'];
+			var area5 = ['2','3','8','14','16','22','27','32','40','45','47','54','57','69','74','76'];
+
+			if (area1.indexOf(radio_num) > -1) {areas[0]+=1}
+			else if (area2.indexOf(radio_num) > -1) {areas[1]+=1}
+			else if (area3.indexOf(radio_num) > -1) {areas[2]+=1}
+			else if (area4.indexOf(radio_num) > -1) {areas[3]+=1}
+			else if (area5.indexOf(radio_num) > -1) {areas[4]+=1}
+		});
+		var recomendacion = areas.indexOf(Math.max(...areas)) + 1;
+		console.log(areas);
+		console.log(recomendacion);
+
+		var colores = ['#FFC107','#f44336','#607D8B','#673AB7','#2196F3'];
+		var ctx = $("#myChart");
+		var data = {
+			labels: [
+				"Área 1",
+				"Área 2",
+				"Área 3",
+				"Área 4",
+				"Área 5"
+			],
+			datasets: [{
+				data: areas,
+				backgroundColor: colores,
+				hoverBackgroundColor: colores
+			}]
+		};
+		var myDoughnutChart = new Chart(ctx, {
+			type: 'pie',
+			data: data
+		});
+
+		$('span[num]').text(recomendacion).parent().css('color', colores[recomendacion-1]);
+		$('#resultados-test > div[area='+recomendacion+']').show();
+		for (var x = 0; x < 5; x++) {
+			$('dt[area]:eq('+x+')').css('color', colores[x]);
+		}
+	});
+
+});
+</script>
+{% endblock heavyjs %}
+
+{% block content %}
+<div class="uk-container uk-container-center uk-margin-top pt-30 pb-50">
+	<h1 class="uk-text-center">Test vocacional</h1>
+	<p class="uk-text-center uk-text-muted">80 preguntas - Elaborado por las psicólogas Malca de Goldenberg y Magali Merchán</p>
+	<hr>
+	<div id="resultados-test">
+		<h2>Área <span num></span></h2>
+		<canvas id="myChart"></canvas>
+		<div area=1 class="area">
+			<h3>Arte y Creatividad - Área 1</h3>
+			<p>
+				<strong>Profesiones recomendadas:</strong> Diseño Gráfico, Diseño y Decoración de Interiores, Diseño de Jardines, Diseño de Modas, Diseño de Joyas, Artes Plásticas (Pintura, Escultura, Danza, Teatro, Artesanía, Cerámica), Dibujo Publicitario, Restauración y Museología, Modelaje, Fotografía, Fotografía Digital, Gestión Gráfica y Publicitaria, Locución y Publicidad, Actuación, Camarografía, Arte Industrial, Producción Audiovisual y Multimedia, Comunicación y Producción en Radio y Televisión, Diseño del Paisaje, Cine y Video, Comunicación Escénica para televisión.
+			</p>
+		</div>
+		<div area=2 class="area">
+			<h3>Ciencias Sociales - Área 2</h3>
+			<p>
+				<strong>Profesiones recomendadas:</strong> Psicología en general, Trabajo Social, Idiomas, Educación Internacional, Historia y Geografía, Periodismo, Periodismo Digital, Derecho, Ciencias Políticas, Sociología, Antropología, Arqueología, Gestión Social y Desarrollo, Consejería Familiar, Comunicación y Publicidad, Administración Educativa, Educación Especial, Psicopedagogía, Estimulación Temprana, Traducción Simultánea, Lingüística, Educación de Párvulos, Bibliotecología, Museología, Relaciones Internacionales y Diplomacia, Comunicación Social con mención en Marketing y Gestión de Empresas, Redacción Creativa y Publicitaria, Relaciones Públicas y Comunicación Organizacional; Hotelería y Turismo; Teología, Institución Sacerdotal.
+			</p>
+		</div>
+		<div area=3 class="area">
+			<h3>Económica, Administrativa y Financiera - Área 3</h3>
+			<p>
+				<strong>Profesiones recomendadas:</strong> Administración de Empresas, Contabilidad, Auditoría, Ventas, Marketing Estratégico, Gestión y Negocios Internacionales, Gestión Empresarial, Gestión Financiera, Ingeniería Comercial, Comercio Exterior, Banca y Finanzas, Gestión de Recursos Humanos, Comunicaciones Integradas en Marketing, Administración de Empresas Ecoturísticas y de Hospitalidad, Ciencias Económicas y Financieras, Administración y Ciencias Políticas, Ciencias Empresariales, Comercio Electrónico, Emprendedores, Gestión de Organismos Públicos (Municipios, Ministerios, etcétera.), Gestión de Centros Educativos.
+			</p>
+		</div>
+		<div area=4 class="area">
+			<h3>Ciencia y Tecnología - Área 4</h3>
+			<p>
+				<strong>Profesiones recomendadas:</strong> Ingeniería en Sistemas Computacionales, Geología, Ingeniería Civil, Arquitectura, Electrónica, Telemática, Telecomunicaciones, Ingeniería Mecatrónica (Robótica), Imagen y Sonido, Minas, Petróleo y Metalurgia, Ingeniería Mecánica, Ingeniería Industrial, Física, Matemáticas Aplicadas, Ingeniería en Estadística, Ingeniería Automotriz, Biotecnología Ambiental, Ingeniería Geográfica, Carreras Militares (Marina, Aviación, Ejército), Ingeniería en Costas y Obras Portuarias, Estadística Informática, Programación y Desarrollo de Sistemas, Tecnología en Informática Educativa, Astronomía, Ingeniería en Ciencias Geográficas y Desarrollo Sustentable.
+			</p>
+		</div>
+		<div area=5 class="area">
+			<h3>Ciencias Ecológicas, Biológicas y de Salud - Área 5</h3>
+			<p>
+				<strong>Profesiones recomendadas:</strong> Biología, Bioquímica, Farmacia, Biología Marina, Bioanálisis, Biotecnología, Ciencias Ambientales, Zootecnia, Veterinaria, Nutrición y Estética, Cosmetología, Dietética y Estética, Medicina, Obstetricia, Urgencias Médicas, Odontología, Enfermería, Tecnología, Oceanografía y Ciencias Ambientales, Médica, Agronomía, Horticultura y Fruticultura, Ingeniería de Alimentos, Gastronomía, Chef, Cultura Física, Deportes y Rehabilitación, Gestión Ambiental, Ingeniería Ambiental, Optometría, Homeopatía, Reflexología.
+			</p>
+		</div>
+		<dl class="uk-description-list-horizontal">
+			<dt area="1">Área 1</dt>
+			<dd>Arte y Creatividad</dd>
+			<dt area="2">Área 2</dt>
+			<dd>Ciencias Sociales</dd>
+			<dt area="3">Área 3</dt>
+			<dd>Económica, Administrativa y Financiera</dd>
+			<dt area="4">Área 4</dt>
+			<dd>Ciencia y Tecnología</dd>
+			<dt area="5">Área 5</dt>
+			<dd>Ciencias Ecológicas, Biológicas y de Salud</dd>
+		</dl>
+	</div>
+	<form class="uk-form uk-form-horizontal" id="test" action="">
+		<div class="uk-grid grid-padding">
+			<div class="uk-width-medium-1-2">
+				<div class="uk-form-row">
+					<span class="uk-form-label">1) Diseñar programas de computación y explorar nuevas aplicaciones
+tecnológicas para uso del internet</span>
+					<div class="uk-form-controls uk-form-controls-text">
+						<label><input type="radio" name="1" value="si" required> Si</label>
+						<label><input type="radio" name="1" value="no"> No</label>
+					</div>
+				</div>
+				<div class="uk-form-row">
+					<span class="uk-form-label">2) Criar, cuidar y tratar animales domésticos y de campo</span>
+					<div class="uk-form-controls uk-form-controls-text">
+						<label><input type="radio" name="2" value="si" required> Si</label>
+						<label><input type="radio" name="2" value="no"> No</label>
+					</div>
+				</div>
+				<div class="uk-form-row">
+					<span class="uk-form-label">3) Investigar sobre áreas verdes, medio ambiente y cambios climáticos</span>
+					<div class="uk-form-controls uk-form-controls-text">
+						<label><input type="radio" name="3" value="si" required> Si</label>
+						<label><input type="radio" name="3" value="no"> No</label>
+					</div>
+				</div>
+				<div class="uk-form-row">
+					<span class="uk-form-label">4) Ilustrar, dibujar y animar digitalmente</span>
+					<div class="uk-form-controls uk-form-controls-text">
+						<label><input type="radio" name="4" value="si" required> Si</label>
+						<label><input type="radio" name="4" value="no"> No</label>
+					</div>
+				</div>
+				<div class="uk-form-row">
+					<span class="uk-form-label">5) Seleccionar, capacitar y motivar al personal de una
+organización/empresa</span>
+					<div class="uk-form-controls uk-form-controls-text">
+						<label><input type="radio" name="5" value="si" required> Si</label>
+						<label><input type="radio" name="5" value="no"> No</label>
+					</div>
+				</div>
+				<div class="uk-form-row">
+					<span class="uk-form-label">6) Realizar excavaciones para descubrir restos del pasado</span>
+					<div class="uk-form-controls uk-form-controls-text">
+						<label><input type="radio" name="6" value="si" required> Si</label>
+						<label><input type="radio" name="6" value="no"> No</label>
+					</div>
+				</div>
+				<div class="uk-form-row">
+					<span class="uk-form-label">7) Resolver problemas de cálculo para construir un puente</span>
+					<div class="uk-form-controls uk-form-controls-text">
+						<label><input type="radio" name="7" value="si" required> Si</label>
+						<label><input type="radio" name="7" value="no"> No</label>
+					</div>
+				</div>
+				<div class="uk-form-row">
+					<span class="uk-form-label">8) Diseñar cursos para enseñar a la gente sobre temas de salud e higiene</span>
+					<div class="uk-form-controls uk-form-controls-text">
+						<label><input type="radio" name="8" value="si" required> Si</label>
+						<label><input type="radio" name="8" value="no"> No</label>
+					</div>
+				</div>
+				<div class="uk-form-row">
+					<span class="uk-form-label">9) Tocar un instrumento y componer música</span>
+					<div class="uk-form-controls uk-form-controls-text">
+						<label><input type="radio" name="9" value="si" required> Si</label>
+						<label><input type="radio" name="9" value="no"> No</label>
+					</div>
+				</div>
+				<div class="uk-form-row">
+					<span class="uk-form-label">10) Planificar cuáles son las metas de una organización pública o privada a mediano y largo plazo</span>
+					<div class="uk-form-controls uk-form-controls-text">
+						<label><input type="radio" name="10" value="si" required> Si</label>
+						<label><input type="radio" name="10" value="no"> No</label>
+					</div>
+				</div>
+				<div class="uk-form-row">
+					<span class="uk-form-label">11) Diseñar y planificar la producción masiva de artículos como muebles,
+autos, equipos de oficina, empaques y envases para alimentos y otros</span>
+					<div class="uk-form-controls uk-form-controls-text">
+						<label><input type="radio" name="11" value="si" required> Si</label>
+						<label><input type="radio" name="11" value="no"> No</label>
+					</div>
+				</div>
+				<div class="uk-form-row">
+					<span class="uk-form-label">12) Diseñar logotipos y portadas de una revista</span>
+					<div class="uk-form-controls uk-form-controls-text">
+						<label><input type="radio" name="12" value="si" required> Si</label>
+						<label><input type="radio" name="12" value="no"> No</label>
+					</div>
+				</div>
+				<div class="uk-form-row">
+					<span class="uk-form-label">13) Organizar eventos y atender a sus asistentes</span>
+					<div class="uk-form-controls uk-form-controls-text">
+						<label><input type="radio" name="13" value="si" required> Si</label>
+						<label><input type="radio" name="13" value="no"> No</label>
+					</div>
+				</div>
+				<div class="uk-form-row">
+					<span class="uk-form-label">14) Atender la salud de personas enfermas</span>
+					<div class="uk-form-controls uk-form-controls-text">
+						<label><input type="radio" name="14" value="si" required> Si</label>
+						<label><input type="radio" name="14" value="no"> No</label>
+					</div>
+				</div>
+				<div class="uk-form-row">
+					<span class="uk-form-label">15) Controlar ingresos y egresos de fondos y presentar el balance final de
+una institución</span>
+					<div class="uk-form-controls uk-form-controls-text">
+						<label><input type="radio" name="15" value="si" required> Si</label>
+						<label><input type="radio" name="15" value="no"> No</label>
+					</div>
+				</div>
+				<div class="uk-form-row">
+					<span class="uk-form-label">16) Hacer experimentos con plantas (frutas, árboles, flores)</span>
+					<div class="uk-form-controls uk-form-controls-text">
+						<label><input type="radio" name="16" value="si" required> Si</label>
+						<label><input type="radio" name="16" value="no"> No</label>
+					</div>
+				</div>
+				<div class="uk-form-row">
+					<span class="uk-form-label">17) Concebir planos para viviendas, edificios y ciudadelas</span>
+					<div class="uk-form-controls uk-form-controls-text">
+						<label><input type="radio" name="17" value="si" required> Si</label>
+						<label><input type="radio" name="17" value="no"> No</label>
+					</div>
+				</div>
+				<div class="uk-form-row">
+					<span class="uk-form-label">18) Investigar y probar nuevos productos farmacéuticos</span>
+					<div class="uk-form-controls uk-form-controls-text">
+						<label><input type="radio" name="18" value="si" required> Si</label>
+						<label><input type="radio" name="18" value="no"> No</label>
+					</div>
+				</div>
+				<div class="uk-form-row">
+					<span class="uk-form-label">19) Hacer propuestas y formular estrategias para aprovechar las relaciones
+económicas entre dos países</span>
+					<div class="uk-form-controls uk-form-controls-text">
+						<label><input type="radio" name="19" value="si" required> Si</label>
+						<label><input type="radio" name="19" value="no"> No</label>
+					</div>
+				</div>
+				<div class="uk-form-row">
+					<span class="uk-form-label">20) Pintar, hacer esculturas, ilustrar libros de arte, etcétera</span>
+					<div class="uk-form-controls uk-form-controls-text">
+						<label><input type="radio" name="20" value="si" required> Si</label>
+						<label><input type="radio" name="20" value="no"> No</label>
+					</div>
+				</div>
+				<div class="uk-form-row">
+					<span class="uk-form-label">21) Elaborar campañas para introducir un nuevo producto al mercado</span>
+					<div class="uk-form-controls uk-form-controls-text">
+						<label><input type="radio" name="21" value="si" required> Si</label>
+						<label><input type="radio" name="21" value="no"> No</label>
+					</div>
+				</div>
+				<div class="uk-form-row">
+					<span class="uk-form-label">22) Examinar y tratar los problemas visuales</span>
+					<div class="uk-form-controls uk-form-controls-text">
+						<label><input type="radio" name="22" value="si" required> Si</label>
+						<label><input type="radio" name="22" value="no"> No</label>
+					</div>
+				</div>
+				<div class="uk-form-row">
+					<span class="uk-form-label">23) Defender a clientes individuales o empresas en juicios de diferente
+naturaleza</span>
+					<div class="uk-form-controls uk-form-controls-text">
+						<label><input type="radio" name="23" value="si" required> Si</label>
+						<label><input type="radio" name="23" value="no"> No</label>
+					</div>
+				</div>
+				<div class="uk-form-row">
+					<span class="uk-form-label">24) Diseñar máquinas que puedan simular actividades humanas</span>
+					<div class="uk-form-controls uk-form-controls-text">
+						<label><input type="radio" name="24" value="si" required> Si</label>
+						<label><input type="radio" name="24" value="no"> No</label>
+					</div>
+				</div>
+				<div class="uk-form-row">
+					<span class="uk-form-label">25) Investigar las causas y efectos de los trastornos emocionales</span>
+					<div class="uk-form-controls uk-form-controls-text">
+						<label><input type="radio" name="25" value="si" required> Si</label>
+						<label><input type="radio" name="25" value="no"> No</label>
+					</div>
+				</div>
+				<div class="uk-form-row">
+					<span class="uk-form-label">26) Supervisar las ventas de un centro comercial</span>
+					<div class="uk-form-controls uk-form-controls-text">
+						<label><input type="radio" name="26" value="si" required> Si</label>
+						<label><input type="radio" name="26" value="no"> No</label>
+					</div>
+				</div>
+				<div class="uk-form-row">
+					<span class="uk-form-label">27) Atender y realizar ejercicios a personas que tienen limitaciones físicas,
+problemas de lenguaje, etcétera</span>
+					<div class="uk-form-controls uk-form-controls-text">
+						<label><input type="radio" name="27" value="si" required> Si</label>
+						<label><input type="radio" name="27" value="no"> No</label>
+					</div>
+				</div>
+				<div class="uk-form-row">
+					<span class="uk-form-label">28) Prepararse para ser modelo profesional</span>
+					<div class="uk-form-controls uk-form-controls-text">
+						<label><input type="radio" name="28" value="si" required> Si</label>
+						<label><input type="radio" name="28" value="no"> No</label>
+					</div>
+				</div>
+				<div class="uk-form-row">
+					<span class="uk-form-label">29) Aconsejar a las personas sobre planes de ahorro e inversiones</span>
+					<div class="uk-form-controls uk-form-controls-text">
+						<label><input type="radio" name="29" value="si" required> Si</label>
+						<label><input type="radio" name="29" value="no"> No</label>
+					</div>
+				</div>
+				<div class="uk-form-row">
+					<span class="uk-form-label">30) Elaborar mapas, planos e imágenes para el estudio y análisis de datos
+geográficos</span>
+					<div class="uk-form-controls uk-form-controls-text">
+						<label><input type="radio" name="30" value="si" required> Si</label>
+						<label><input type="radio" name="30" value="no"> No</label>
+					</div>
+				</div>
+				<div class="uk-form-row">
+					<span class="uk-form-label">31) Diseñar juegos interactivos electrónicos para computadora</span>
+					<div class="uk-form-controls uk-form-controls-text">
+						<label><input type="radio" name="31" value="si" required> Si</label>
+						<label><input type="radio" name="31" value="no"> No</label>
+					</div>
+				</div>
+				<div class="uk-form-row">
+					<span class="uk-form-label">32) Realizar el control de calidad de los alimentos</span>
+					<div class="uk-form-controls uk-form-controls-text">
+						<label><input type="radio" name="32" value="si" required> Si</label>
+						<label><input type="radio" name="32" value="no"> No</label>
+					</div>
+				</div>
+				<div class="uk-form-row">
+					<span class="uk-form-label">33) Tener un negocio propio de tipo comercial</span>
+					<div class="uk-form-controls uk-form-controls-text">
+						<label><input type="radio" name="33" value="si" required> Si</label>
+						<label><input type="radio" name="33" value="no"> No</label>
+					</div>
+				</div>
+				<div class="uk-form-row">
+					<span class="uk-form-label">34) Escribir artículos periodísticos, cuentos, novelas y otros</span>
+					<div class="uk-form-controls uk-form-controls-text">
+						<label><input type="radio" name="34" value="si" required> Si</label>
+						<label><input type="radio" name="34" value="no"> No</label>
+					</div>
+				</div>
+				<div class="uk-form-row">
+					<span class="uk-form-label">35) Redactar guiones y libretos para un programa de televisión</span>
+					<div class="uk-form-controls uk-form-controls-text">
+						<label><input type="radio" name="35" value="si" required> Si</label>
+						<label><input type="radio" name="35" value="no"> No</label>
+					</div>
+				</div>
+				<div class="uk-form-row">
+					<span class="uk-form-label">36) Organizar un plan de distribución y venta de un gran almacén</span>
+					<div class="uk-form-controls uk-form-controls-text">
+						<label><input type="radio" name="36" value="si" required> Si</label>
+						<label><input type="radio" name="36" value="no"> No</label>
+					</div>
+				</div>
+				<div class="uk-form-row">
+					<span class="uk-form-label">37) Estudiar la diversidad cultural en el ámbito rural y urbano</span>
+					<div class="uk-form-controls uk-form-controls-text">
+						<label><input type="radio" name="37" value="si" required> Si</label>
+						<label><input type="radio" name="37" value="no"> No</label>
+					</div>
+				</div>
+				<div class="uk-form-row">
+					<span class="uk-form-label">38) Gestionar y evaluar convenios internacionales de cooperación para el desarrollo social</span>
+					<div class="uk-form-controls uk-form-controls-text">
+						<label><input type="radio" name="38" value="si" required> Si</label>
+						<label><input type="radio" name="38" value="no"> No</label>
+					</div>
+				</div>
+				<div class="uk-form-row">
+					<span class="uk-form-label">39) Crear campañas publicitarias</span>
+					<div class="uk-form-controls uk-form-controls-text">
+						<label><input type="radio" name="39" value="si" required> Si</label>
+						<label><input type="radio" name="39" value="no"> No</label>
+					</div>
+				</div>
+				<div class="uk-form-row">
+					<span class="uk-form-label">40) Trabajar investigando la reproducción de peces, camarones y otros animales marinos</span>
+					<div class="uk-form-controls uk-form-controls-text">
+						<label><input type="radio" name="40" value="si" required> Si</label>
+						<label><input type="radio" name="40" value="no"> No</label>
+					</div>
+				</div>
+			</div>
+			<div class="uk-width-medium-1-2">
+				<div class="uk-form-row">
+					<span class="uk-form-label">41) Dedicarse a fabricar productos alimenticios de consumo masivo</span>
+					<div class="uk-form-controls uk-form-controls-text">
+						<label><input type="radio" name="41" value="si" required> Si</label>
+						<label><input type="radio" name="41" value="no"> No</label>
+					</div>
+				</div>
+				<div class="uk-form-row">
+					<span class="uk-form-label">42) Gestionar y evaluar proyectos de desarrollo en una institución educativa y/o fundación</span>
+					<div class="uk-form-controls uk-form-controls-text">
+						<label><input type="radio" name="42" value="si" required> Si</label>
+						<label><input type="radio" name="42" value="no"> No</label>
+					</div>
+				</div>
+				<div class="uk-form-row">
+					<span class="uk-form-label">43) Rediseñar y decorar espacios físicos en viviendas, oficinas y locales comerciales</span>
+					<div class="uk-form-controls uk-form-controls-text">
+						<label><input type="radio" name="43" value="si" required> Si</label>
+						<label><input type="radio" name="43" value="no"> No</label>
+					</div>
+				</div>
+				<div class="uk-form-row">
+					<span class="uk-form-label">44) Administrar una empresa de turismo y/o agencias de viaje</span>
+					<div class="uk-form-controls uk-form-controls-text">
+						<label><input type="radio" name="44" value="si" required> Si</label>
+						<label><input type="radio" name="44" value="no"> No</label>
+					</div>
+				</div>
+				<div class="uk-form-row">
+					<span class="uk-form-label">45) Aplicar métodos alternativos a la medicina tradicional para atender personas con dolencias de diversa índole</span>
+					<div class="uk-form-controls uk-form-controls-text">
+						<label><input type="radio" name="45" value="si" required> Si</label>
+						<label><input type="radio" name="45" value="no"> No</label>
+					</div>
+				</div>
+				<div class="uk-form-row">
+					<span class="uk-form-label">46) Diseñar ropa para niños, jóvenes y adultos</span>
+					<div class="uk-form-controls uk-form-controls-text">
+						<label><input type="radio" name="46" value="si" required> Si</label>
+						<label><input type="radio" name="46" value="no"> No</label>
+					</div>
+				</div>
+				<div class="uk-form-row">
+					<span class="uk-form-label">47) Investigar organismos vivos para elaborar vacunas</span>
+					<div class="uk-form-controls uk-form-controls-text">
+						<label><input type="radio" name="47" value="si" required> Si</label>
+						<label><input type="radio" name="47" value="no"> No</label>
+					</div>
+				</div>
+				<div class="uk-form-row">
+					<span class="uk-form-label">48) Manejar y/o dar mantenimiento a dispositivos/aparatos tecnológicos
+en aviones, barcos, radares, etcétera</span>
+					<div class="uk-form-controls uk-form-controls-text">
+						<label><input type="radio" name="48" value="si" required> Si</label>
+						<label><input type="radio" name="48" value="no"> No</label>
+					</div>
+				</div>
+				<div class="uk-form-row">
+					<span class="uk-form-label">49) Estudiar idiomas extranjeros –actuales y antiguos- para hacer traducción</span>
+					<div class="uk-form-controls uk-form-controls-text">
+						<label><input type="radio" name="49" value="si" required> Si</label>
+						<label><input type="radio" name="49" value="no"> No</label>
+					</div>
+				</div>
+				<div class="uk-form-row">
+					<span class="uk-form-label">50) Restaurar piezas y obras de arte </span>
+					<div class="uk-form-controls uk-form-controls-text">
+						<label><input type="radio" name="50" value="si" required> Si</label>
+						<label><input type="radio" name="50" value="no"> No</label>
+					</div>
+				</div>
+				<div class="uk-form-row">
+					<span class="uk-form-label">51) Revisar y dar mantenimiento a artefactos eléctricos, electrónicos y
+computadoras</span>
+					<div class="uk-form-controls uk-form-controls-text">
+						<label><input type="radio" name="51" value="si" required> Si</label>
+						<label><input type="radio" name="51" value="no"> No</label>
+					</div>
+				</div>
+				<div class="uk-form-row">
+					<span class="uk-form-label">52) Enseñar a niños de 0 a 5 años</span>
+					<div class="uk-form-controls uk-form-controls-text">
+						<label><input type="radio" name="52" value="si" required> Si</label>
+						<label><input type="radio" name="52" value="no"> No</label>
+					</div>
+				</div>
+				<div class="uk-form-row">
+					<span class="uk-form-label">53) Investigar y/o sondear nuevos mercados</span>
+					<div class="uk-form-controls uk-form-controls-text">
+						<label><input type="radio" name="53" value="si" required> Si</label>
+						<label><input type="radio" name="53" value="no"> No</label>
+					</div>
+				</div>
+				<div class="uk-form-row">
+					<span class="uk-form-label">54) Atender la salud dental de las personas</span>
+					<div class="uk-form-controls uk-form-controls-text">
+						<label><input type="radio" name="54" value="si" required> Si</label>
+						<label><input type="radio" name="54" value="no"> No</label>
+					</div>
+				</div>
+				<div class="uk-form-row">
+					<span class="uk-form-label">55) Tratar a niños, jóvenes y adultos con problemas psicológicos</span>
+					<div class="uk-form-controls uk-form-controls-text">
+						<label><input type="radio" name="55" value="si" required> Si</label>
+						<label><input type="radio" name="55" value="no"> No</label>
+					</div>
+				</div>
+				<div class="uk-form-row">
+					<span class="uk-form-label">56) Crear estrategias de promoción y venta de nuevos productos ecuatorianos en el mercado internacional</span>
+					<div class="uk-form-controls uk-form-controls-text">
+						<label><input type="radio" name="56" value="si" required> Si</label>
+						<label><input type="radio" name="56" value="no"> No</label>
+					</div>
+				</div>
+				<div class="uk-form-row">
+					<span class="uk-form-label">57) Planificar y recomendar dietas para personas diabéticas y/o con sobrepeso</span>
+					<div class="uk-form-controls uk-form-controls-text">
+						<label><input type="radio" name="57" value="si" required> Si</label>
+						<label><input type="radio" name="57" value="no"> No</label>
+					</div>
+				</div>
+				<div class="uk-form-row">
+					<span class="uk-form-label">58) Trabajar en una empresa petrolera en un cargo técnico como control de la producción</span>
+					<div class="uk-form-controls uk-form-controls-text">
+						<label><input type="radio" name="58" value="si" required> Si</label>
+						<label><input type="radio" name="58" value="no"> No</label>
+					</div>
+				</div>
+				<div class="uk-form-row">
+					<span class="uk-form-label">59) Administrar una empresa (familiar, privada o pública)</span>
+					<div class="uk-form-controls uk-form-controls-text">
+						<label><input type="radio" name="59" value="si" required> Si</label>
+						<label><input type="radio" name="59" value="no"> No</label>
+					</div>
+				</div>
+				<div class="uk-form-row">
+					<span class="uk-form-label">60) Tener un taller de reparación y mantenimiento de carros, tractores, etcétera</span>
+					<div class="uk-form-controls uk-form-controls-text">
+						<label><input type="radio" name="60" value="si" required> Si</label>
+						<label><input type="radio" name="60" value="no"> No</label>
+					</div>
+				</div>
+				<div class="uk-form-row">
+					<span class="uk-form-label">61) Ejecutar proyectos de extracción minera y metalúrgica</span>
+					<div class="uk-form-controls uk-form-controls-text">
+						<label><input type="radio" name="61" value="si" required> Si</label>
+						<label><input type="radio" name="61" value="no"> No</label>
+					</div>
+				</div>
+				<div class="uk-form-row">
+					<span class="uk-form-label">62) Asistir a directivos de multinacionales con manejo de varios idiomas</span>
+					<div class="uk-form-controls uk-form-controls-text">
+						<label><input type="radio" name="62" value="si" required> Si</label>
+						<label><input type="radio" name="62" value="no"> No</label>
+					</div>
+				</div>
+				<div class="uk-form-row">
+					<span class="uk-form-label">63) Diseñar programas educativos para niños con discapacidad</span>
+					<div class="uk-form-controls uk-form-controls-text">
+						<label><input type="radio" name="63" value="si" required> Si</label>
+						<label><input type="radio" name="63" value="no"> No</label>
+					</div>
+				</div>
+				<div class="uk-form-row">
+					<span class="uk-form-label">64) Aplicar conocimientos de estadística en investigaciones en diversas áreas (social, administrativa, salud, etcétera)</span>
+					<div class="uk-form-controls uk-form-controls-text">
+						<label><input type="radio" name="64" value="si" required> Si</label>
+						<label><input type="radio" name="64" value="no"> No</label>
+					</div>
+				</div>
+				<div class="uk-form-row">
+					<span class="uk-form-label">65) Fotografiar hechos históricos, lugares significativos, rostros, paisajes para el área publicitaria, artística, periodística y social</span>
+					<div class="uk-form-controls uk-form-controls-text">
+						<label><input type="radio" name="65" value="si" required> Si</label>
+						<label><input type="radio" name="65" value="no"> No</label>
+					</div>
+				</div>
+				<div class="uk-form-row">
+					<span class="uk-form-label">66) Trabajar en museos y bibliotecas nacionales e internacionales</span>
+					<div class="uk-form-controls uk-form-controls-text">
+						<label><input type="radio" name="66" value="si" required> Si</label>
+						<label><input type="radio" name="66" value="no"> No</label>
+					</div>
+				</div>
+				<div class="uk-form-row">
+					<span class="uk-form-label">67) Ser parte de un grupo de teatro</span>
+					<div class="uk-form-controls uk-form-controls-text">
+						<label><input type="radio" name="67" value="si" required> Si</label>
+						<label><input type="radio" name="67" value="no"> No</label>
+					</div>
+				</div>
+				<div class="uk-form-row">
+					<span class="uk-form-label">68) Producir cortometrajes, spots publicitarios, programas educativos, de ficción, etcétera</span>
+					<div class="uk-form-controls uk-form-controls-text">
+						<label><input type="radio" name="68" value="si" required> Si</label>
+						<label><input type="radio" name="68" value="no"> No</label>
+					</div>
+				</div>
+				<div class="uk-form-row">
+					<span class="uk-form-label">69) Estudiar la influencia entre las corrientes marinas y el clima y
+sus consecuencias ecológicas</span>
+					<div class="uk-form-controls uk-form-controls-text">
+						<label><input type="radio" name="69" value="si" required> Si</label>
+						<label><input type="radio" name="69" value="no"> No</label>
+					</div>
+				</div>
+				<div class="uk-form-row">
+					<span class="uk-form-label">70) Conocer las distintas religiones, su filosofía y transmitirlas a la comunidad en general</span>
+					<div class="uk-form-controls uk-form-controls-text">
+						<label><input type="radio" name="70" value="si" required> Si</label>
+						<label><input type="radio" name="70" value="no"> No</label>
+					</div>
+				</div>
+				<div class="uk-form-row">
+					<span class="uk-form-label">71) Asesorar a inversionistas en la compra de bienes/acciones en mercados
+nacionales e internacionales</span>
+					<div class="uk-form-controls uk-form-controls-text">
+						<label><input type="radio" name="71" value="si" required> Si</label>
+						<label><input type="radio" name="71" value="no"> No</label>
+					</div>
+				</div>
+				<div class="uk-form-row">
+					<span class="uk-form-label">72) Estudiar grupos étnicos, sus costumbres , tradiciones, cultura y compartir sus vivencias</span>
+					<div class="uk-form-controls uk-form-controls-text">
+						<label><input type="radio" name="72" value="si" required> Si</label>
+						<label><input type="radio" name="72" value="no"> No</label>
+					</div>
+				</div>
+				<div class="uk-form-row">
+					<span class="uk-form-label">73) Explorar el espacio sideral, los planetas, características y componentes</span>
+					<div class="uk-form-controls uk-form-controls-text">
+						<label><input type="radio" name="73" value="si" required> Si</label>
+						<label><input type="radio" name="73" value="no"> No</label>
+					</div>
+				</div>
+				<div class="uk-form-row">
+					<span class="uk-form-label">74) Mejorar la imagen facial y corporal de las personas aplicando diferentes técnicas</span>
+					<div class="uk-form-controls uk-form-controls-text">
+						<label><input type="radio" name="74" value="si" required> Si</label>
+						<label><input type="radio" name="74" value="no"> No</label>
+					</div>
+				</div>
+				<div class="uk-form-row">
+					<span class="uk-form-label">75) Decorar jardines de casas y parques públicos</span>
+					<div class="uk-form-controls uk-form-controls-text">
+						<label><input type="radio" name="75" value="si" required> Si</label>
+						<label><input type="radio" name="75" value="no"> No</label>
+					</div>
+				</div>
+				<div class="uk-form-row">
+					<span class="uk-form-label">76) Administrar y renovar menúes de comidas en un hotel o restaurante</span>
+					<div class="uk-form-controls uk-form-controls-text">
+						<label><input type="radio" name="76" value="si" required> Si</label>
+						<label><input type="radio" name="76" value="no"> No</label>
+					</div>
+				</div>
+				<div class="uk-form-row">
+					<span class="uk-form-label">77) Trabajar como presentador de televisión, locutor de radio y televisión, animador de programas culturales y concursos</span>
+					<div class="uk-form-controls uk-form-controls-text">
+						<label><input type="radio" name="77" value="si" required> Si</label>
+						<label><input type="radio" name="77" value="no"> No</label>
+					</div>
+				</div>
+				<div class="uk-form-row">
+					<span class="uk-form-label">78) Diseñar y ejecutar programas de turismo</span>
+					<div class="uk-form-controls uk-form-controls-text">
+						<label><input type="radio" name="78" value="si" required> Si</label>
+						<label><input type="radio" name="78" value="no"> No</label>
+					</div>
+				</div>
+				<div class="uk-form-row">
+					<span class="uk-form-label">79) Administrar y ordenar (planificar) adecuadamente la ocupación del espacio físico de ciudades, países etc, utilizando imágenes de satélite, mapas</span>
+					<div class="uk-form-controls uk-form-controls-text">
+						<label><input type="radio" name="79" value="si" required> Si</label>
+						<label><input type="radio" name="79" value="no"> No</label>
+					</div>
+				</div>
+				<div class="uk-form-row">
+					<span class="uk-form-label">80) Organizar, planificar y administrar centros educativos</span>
+					<div class="uk-form-controls uk-form-controls-text">
+						<label><input type="radio" name="80" value="si" required> Si</label>
+						<label><input type="radio" name="80" value="no"> No</label>
+					</div>
+				</div>
+			</div>
+			<button class="uk-button uk-width-1-1 uk-margin-top uk-button-large uk-button-primary">Ver resultados</button>
+		</div>
+	</form>
+</div>
+{% endblock content %}
