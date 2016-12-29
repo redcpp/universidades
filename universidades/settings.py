@@ -25,7 +25,7 @@ SECRET_KEY = 'ja9$5p+nw*m6g1k^*e$$)nf0)7sf4$2p4edpf3&je7#an%s-$$'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['universidd.dev']
 
 
 # Application definition
