@@ -42,7 +42,7 @@ class Busqueda(models.Model):
 	query = models.CharField(max_length=100)
 	root = models.CharField(max_length=100)
 	fecha = models.DateTimeField()
-	num_resultados = models.IntegerField()
+	num_resultados = models.IntegerField(default=0)
 
 	class Meta:
 		verbose_name = "Busqueda"

@@ -1,12 +1,11 @@
 from django.test import TestCase
-from datetime import datetime
-
+from django.utils import timezone
 from .models import Carrera, Universidad, Estado, Busqueda
 
 class BusquedaTest(TestCase):
 	def setUp(self):
 		aguascalientes = Estado.objects.create(nombre='Aguascalientes', municipios=11)
-		Busqueda.objects.create(estado=aguascalientes, query='Medicina', root='Medic', fecha=datetime.now())
+		Busqueda.objects.create(estado=aguascalientes, query='Medicina', root='Medic', fecha=timezone.now())
 
 	def test_busqueda_estado_db(self):
 		aguascalientes = Estado.objects.last()
